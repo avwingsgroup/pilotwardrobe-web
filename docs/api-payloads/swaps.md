@@ -38,7 +38,7 @@ Response `201`:
   "success": true,
   "message": "Swap proposal sent.",
   "data": {
-    "id": "swp_pq977c8",
+    "id": "swp_h24wnf6",
     "kind": "swap",
     "direction": "sent",
     "status": "pending",
@@ -152,8 +152,8 @@ Response `201`:
       "trades": 1204,
       "member_since": "2024-01-01T00:00:00Z"
     },
-    "expires_at": "2026-10-23T09:50:13.066Z",
-    "created_at": "2026-10-21T09:50:13.066Z",
+    "expires_at": "2026-10-23T13:08:31.545Z",
+    "created_at": "2026-10-21T13:08:31.545Z",
     "history": [],
     "allowed_actions": [
       "cancel",
@@ -316,14 +316,14 @@ Response `200`:
         "location": "Lagos",
         "member_since": "2024-01-01T00:00:00Z"
       },
-      "expires_at": "2026-10-22T15:50:12.689Z",
-      "created_at": "2026-10-21T08:50:12.689Z",
+      "expires_at": "2026-10-22T19:08:31.283Z",
+      "created_at": "2026-10-21T12:08:31.283Z",
       "history": [
         {
           "id": "h1",
           "label": "Swap proposed · Zulu 3 + $180",
           "detail": "Today · Ifeoma A.",
-          "occurred_at": "2026-10-21T08:50:12.689Z",
+          "occurred_at": "2026-10-21T12:08:31.283Z",
           "kind": "offer"
         }
       ],
@@ -467,14 +467,14 @@ Response `200`:
       "location": "Lagos",
       "member_since": "2024-01-01T00:00:00Z"
     },
-    "expires_at": "2026-10-22T15:50:12.689Z",
-    "created_at": "2026-10-21T08:50:12.689Z",
+    "expires_at": "2026-10-22T19:08:31.283Z",
+    "created_at": "2026-10-21T12:08:31.283Z",
     "history": [
       {
         "id": "h1",
         "label": "Swap proposed · Zulu 3 + $180",
         "detail": "Today · Ifeoma A.",
-        "occurred_at": "2026-10-21T08:50:12.689Z",
+        "occurred_at": "2026-10-21T12:08:31.283Z",
         "kind": "offer"
       }
     ],

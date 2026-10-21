@@ -66,18 +66,18 @@ Response `200`:
 {
   "success": true,
   "data": {
-    "payment_id": "pay_bzyshds",
+    "payment_id": "pay_z0zatcg",
     "gateway": "paystack",
     "status": "pending",
-    "reference": "PW-2026-719350",
-    "authorization_url": "/payment/mock-gateway?reference=PW-2026-719350&gateway=paystack&return_url=https%3A%2F%2Fpilotwardrobe.com%2Fpayment%2Fcallback"
+    "reference": "PW-2026-569051",
+    "authorization_url": "/payment/mock-gateway?reference=PW-2026-569051&gateway=paystack&return_url=https%3A%2F%2Fpilotwardrobe.com%2Fpayment%2Fcallback"
   }
 }
 ```
 
 ### Verify payment (poll)
 
-`GET /payments/PW-2026-719350` · as `pilot@example.com` (user, KYC approved)
+`GET /payments/PW-2026-569051` · as `pilot@example.com` (user, KYC approved)
 
 Response `200`:
 
@@ -85,8 +85,8 @@ Response `200`:
 {
   "success": true,
   "data": {
-    "id": "pay_bzyshds",
-    "reference": "PW-2026-719350",
+    "id": "pay_z0zatcg",
+    "reference": "PW-2026-569051",
     "status": "pending",
     "gateway": "paystack",
     "order_id": "ord_4485",

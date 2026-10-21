@@ -118,7 +118,7 @@ const features = [
           <p>List in under two minutes and reach a global audience of verified buyers.</p>
           <div class="pw-home__cta-actions">
             <AppButton variant="inverse" size="lg" :to="{ name: 'listing-new' }">Start selling today</AppButton>
-            <AppButton variant="inverse-outline" size="lg" to="/how-it-works">How it works</AppButton>
+            <AppButton variant="inverse-outline" size="lg" to="/how-to-sell">How it works</AppButton>
           </div>
           <Send class="pw-home__cta-plane" :size="160" :stroke-width="0.8" aria-hidden="true" />
         </div>

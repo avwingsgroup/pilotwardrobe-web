@@ -388,14 +388,14 @@ Response `200`:
         "author": "Amaka N.",
         "initials": "AN",
         "body": "Seller offered return on DS-2041 promptly. Good faith.",
-        "created_at": "2026-10-20T09:50:13.095Z"
+        "created_at": "2026-10-20T13:08:31.567Z"
       },
       {
         "id": "n2",
         "author": "Tolu A.",
         "initials": "TA",
         "body": "Raised listing cap after KYC.",
-        "created_at": "2026-10-11T09:50:13.095Z"
+        "created_at": "2026-10-11T13:08:31.567Z"
       }
     ]
   }
@@ -437,7 +437,7 @@ Response `200`:
     "age_hours": 26,
     "over_sla": true,
     "status": "pending",
-    "submitted_at": "2026-10-20T07:50:13.097Z",
+    "submitted_at": "2026-10-20T11:08:31.568Z",
     "auto_checks_passed": 3,
     "auto_checks_total": 4,
     "document": null,
@@ -558,12 +558,12 @@ Response `200`:
     "freight_label": "—",
     "age_label": "6h",
     "risk": "high",
-    "created_at": "2026-10-21T03:50:13.098Z",
+    "created_at": "2026-10-21T07:08:31.569Z",
     "payment_gateway": "paystack",
     "payment_reference": "PSK_8812_a91f",
     "ledger": [
       {
-        "at": "2026-10-21T03:50:13.098Z",
+        "at": "2026-10-21T07:08:31.569Z",
         "entry": "Card payment captured (Paystack)",
         "amount": {
           "amount": 223500,
@@ -571,7 +571,7 @@ Response `200`:
         }
       },
       {
-        "at": "2026-10-21T03:50:13.098Z",
+        "at": "2026-10-21T07:08:31.569Z",
         "entry": "Escrow hold created",
         "amount": {
           "amount": 223500,
@@ -981,8 +981,8 @@ Response `200`:
   "success": true,
   "data": [
     {
-      "id": "au_rfk0rxa",
-      "at": "2026-10-21T09:50:13.104Z",
+      "id": "au_lj4rr29",
+      "at": "2026-10-21T13:08:31.574Z",
       "actor": {
         "name": "Tolu Adeyemi",
         "initials": "TA",
@@ -995,8 +995,8 @@ Response `200`:
       "ip": "102.89.4.12"
     },
     {
-      "id": "au_khg09t1",
-      "at": "2026-10-21T09:50:13.102Z",
+      "id": "au_6ap8opw",
+      "at": "2026-10-21T13:08:31.572Z",
       "actor": {
         "name": "Tolu Adeyemi",
         "initials": "TA",
@@ -1236,14 +1236,14 @@ Response `200`:
         "author": "Amaka N.",
         "initials": "AN",
         "body": "Seller offered return on DS-2041 promptly. Good faith.",
-        "created_at": "2026-10-20T09:50:13.108Z"
+        "created_at": "2026-10-20T13:08:31.577Z"
       },
       {
         "id": "n2",
         "author": "Tolu A.",
         "initials": "TA",
         "body": "Raised listing cap after KYC.",
-        "created_at": "2026-10-11T09:50:13.108Z"
+        "created_at": "2026-10-11T13:08:31.577Z"
       }
     ]
   }
@@ -1279,7 +1279,7 @@ Response `200`:
     "age_hours": 26,
     "over_sla": true,
     "status": "done",
-    "submitted_at": "2026-10-20T07:50:13.109Z",
+    "submitted_at": "2026-10-20T11:08:31.577Z",
     "auto_checks_passed": 3,
     "auto_checks_total": 4,
     "document": null,

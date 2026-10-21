@@ -9,7 +9,8 @@ export const router = createRouter({
   routes,
   scrollBehavior(to, from, saved) {
     if (saved) return saved
-    if (to.hash) return { el: to.hash, top: 96, behavior: 'smooth' }
+    // Clears the sticky header plus the info-centre sub-nav.
+    if (to.hash) return { el: to.hash, top: 136, behavior: 'smooth' }
     // Keep scroll position when only the query changes (filters, tabs, pagination is handled by the page).
     if (to.path === from.path) return false
     return { top: 0 }

@@ -23,6 +23,8 @@ declare module 'vue-router' {
     fullWidth?: boolean
     /** Auth split-screen hero variant (VA1 cockpit, VA5 headset, VA3 shirt). */
     authPanel?: 'cockpit' | 'headset' | 'shirt'
+    /** Information-centre page (VC1–VC13): shows the guides/policies/support sub-nav and info footer. */
+    info?: boolean
   }
 }
 

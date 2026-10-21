@@ -105,19 +105,19 @@ Response `200`:
         "id": "ses_1",
         "device": "Chrome on macOS",
         "location": "Lagos, NG",
-        "last_active_at": "2026-10-21T09:50:12.624Z",
+        "last_active_at": "2026-10-21T13:08:31.245Z",
         "current": true
       },
       {
         "id": "ses_2",
         "device": "Pilotwardrobe iOS 3.2",
         "location": "iPhone 15 · Lagos, NG",
-        "last_active_at": "2026-10-21T07:50:12.624Z",
+        "last_active_at": "2026-10-21T11:08:31.245Z",
         "current": false
       },
       "… 1 more"
     ],
-    "password_changed_at": "2026-07-21T09:50:12.624Z"
+    "password_changed_at": "2026-07-21T13:08:31.245Z"
   }
 }
 ```
@@ -274,7 +274,7 @@ Response `200`:
       "warn_outside_measurements": true,
       "use_at_checkout": false
     },
-    "updated_at": "2026-10-21T09:50:12.995Z",
+    "updated_at": "2026-10-21T13:08:31.488Z",
     "orders_used_on": 6
   }
 }
@@ -352,7 +352,7 @@ Response `201`:
     "state": "Lagos",
     "country_code": "NG",
     "is_default": false,
-    "id": "adr_m05npvw"
+    "id": "adr_gspoo9d"
   }
 }
 ```

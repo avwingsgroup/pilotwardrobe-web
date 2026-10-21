@@ -150,6 +150,11 @@ test('mock server honours the documented contract', { timeout: 60_000 }, async (
     { doc: 'disputes', title: 'Dispute case', method: 'GET', url: `/disputes/${dispute.id}`, as: P },
     { doc: 'disputes', title: 'Open dispute — validation (422)', method: 'POST', url: '/disputes', body: { orderId: order.id, reason: '', requested: 'full_refund', amount: null, description: '', evidenceIds: [] }, as: P },
     { doc: 'disputes', title: 'Reply on dispute', method: 'POST', url: `/disputes/${dispute.id}/messages`, body: { body: 'Photos of the damaged ear cup attached.', evidenceIds: [] }, as: P },
+    // support (VC10, VC11)
+    { doc: 'support', title: 'Help Center summary', method: 'GET', url: '/help/summary', as: null },
+    { doc: 'support', title: 'Contact page info', method: 'GET', url: '/support/contact-info', as: null },
+    { doc: 'support', title: 'Contact — callback request', method: 'POST', url: '/contact', body: { name: 'Nehemiah Okoye', email: 'pilot@example.com', topic: 'callback', subject: 'Tracking hasn’t updated in 3 days', message: 'The order shows Holding pattern in Frankfurt since Monday.', orderId: order.id, phone: '+234 803 123 4567', attachmentIds: [] }, as: P },
+    { doc: 'support', title: 'Contact — validation (422)', method: 'POST', url: '/contact', body: { name: '', email: 'nope', topic: 'callback', subject: '', message: 'short', phone: '' }, as: null },
     // admin
     { doc: 'admin', title: 'Overview', method: 'GET', url: '/admin/overview', as: SA },
     { doc: 'admin', title: 'Users table', method: 'GET', url: '/admin/users', params: { tab: 'all', per_page: 2, sort: '-joined_at' }, as: A },

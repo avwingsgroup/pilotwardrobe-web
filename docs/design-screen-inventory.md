@@ -1,6 +1,6 @@
 # Design screen inventory
 
-Source: `docs/pilotwardrobe-designs` (62 frames). Every supplied frame is listed with its route, the role that can reach it, the API it depends on and its implementation status.
+Source: `docs/pilotwardrobe-designs` (75 frames). Every supplied frame is listed with its route, the role that can reach it, the API it depends on and its implementation status.
 
 **Mobile designs:** the coverage audit (VB0) references mobile frames (A0–A8, K1–K7, B1–B12, S1–S9, C1–C5, T1–T6, M1–M5, W1–W5, F1–F4). These were **not supplied**. Mobile layouts were derived from the desktop frames and from the app mock-ups in V1 (bottom tab bar, search under the header, chip filters). See *Design gaps* at the end.
 
@@ -26,9 +26,28 @@ Legend — **Status:** ✅ implemented to the design · 🟡 implemented with a 
 | VB20 | System states (404, no results, empty hangar, offline, maintenance, verification required) | ✔ | derived | `/404` (catch-all), `/offline`, `/maintenance`, inline empty/error states | all | — | ✅ |
 | — | All categories | — | — | `/categories` | visitor+ | `GET /categories` | ➕ |
 | — | Aviators / photographers directory | — | — | `/aviators`, `/photographers` | visitor+ | `GET /sellers?type=` | ➕ |
-| — | About, How it works, FAQ, Terms, Privacy, Cookies, help articles | — | — | `/about`, `/how-it-works`, `/faq`, `/terms`, `/privacy`, `/cookies`, `/help/:slug` | visitor+ | `GET /pages/{slug}` | ➕ |
-| — | Contact | — | — | `/contact` | visitor+ | `POST /contact` | ➕ |
+| — | Help articles (CMS) | — | — | `/help/:slug` | visitor+ | `GET /pages/{slug}` | ➕ |
 | — | 403 / 419 / 500 | — | — | `/403`, `/419`, `/500` | all | — | ➕ (VB20 style) |
+
+## Information centre — guides, policies, support (info)
+
+All thirteen are `meta.info` routes in `PublicLayout`, which swaps in a Guides · Policies · Support sub-nav (sticky on desktop, swipeable on phones) and the information footer under the usual header. Copy lives in typed content files under `src/content/info/`; platform timings (5-day dispatch, 72-hour inspection, 48-hour seller reply, 5-business-day mediation, 8% commission) come from one `PLATFORM` constant.
+
+| Frame | Screen | Route | Role | Required API | Status |
+|---|---|---|---|---|---|
+| VC1 | How to swap | `/how-to-swap` (old `/how-it-works` redirects) | visitor+ | — | ✅ |
+| VC2 | How to sell | `/how-to-sell` | visitor+ | — | ✅ |
+| VC3 | Freight guides | `/freight-guide` | visitor+ | — | ✅ |
+| VC4 | Seller fees | `/seller-fees` | visitor+ | — | ✅ |
+| VC5 | Terms of service | `/terms` | visitor+ | — | ✅ |
+| VC6 | Privacy policy | `/privacy` | visitor+ | — | 🟡 processor names generalised (see deviations) |
+| VC7 | Returns & refunds | `/returns` | visitor+ | — | ✅ |
+| VC8 | Escrow & disputes | `/escrow-disputes` | visitor+ | — | ✅ |
+| VC9 | Cookie policy + preferences | `/cookies` | visitor+ | — (choice stored on the device) | ✅ |
+| VC10 | Help Center | `/help` | visitor+ (active-order card when signed in) | `GET /help/summary`, `GET /me/orders?status=active` | ✅ |
+| VC11 | Contact us | `/contact` | visitor+ (order picker when signed in) | `GET /support/contact-info`, `POST /contact`, `POST /media` | 🟡 live chat routed to the message form (see deviations) |
+| VC12 | FAQs | `/faq` (`?topic=`, `?q=`, `#question-id`) | visitor+ | — | ✅ |
+| VC13 | About us | `/about` | visitor+ | — | ✅ |
 
 ## Authentication (web-auth)
 
@@ -114,6 +133,12 @@ Legend — **Status:** ✅ implemented to the design · 🟡 implemented with a 
 1. **V4 checkout payment card fields.** The frame shows raw card number / expiry / CVC inputs. The brief forbids collecting or storing card data and requires a gateway-agnostic architecture. The Payment step is therefore a gateway selector (from `GET /payment-methods`), and card entry happens on the gateway's hosted page. This keeps PCI scope with Paystack / Flutterwave / Monnify / Stripe / PayPal.
 2. **Top navigation for visitors vs. members.** V1 (visitor) and V2+ (member) headers are both implemented and switch on auth state.
 3. **Mobile bottom tab bar.** Not in a web frame. It mirrors the iOS/Android app shown in V1 and is shown under 768px only.
+4. **VC11/VC10 live chat.** There is no live-chat provider yet, so “Start chat” / “Start live chat” open the contact form (relabelled “Start a message” / “Message the crew”). Swap the buttons to the chat widget once a provider (Intercom, Zendesk, Crisp…) is chosen.
+5. **VC6 named processors.** The frame lists Stripe · PayPal, Onfido · Persona, Postmark and AWS. Email actually goes through ZeptoMail and the KYC provider isn’t chosen, so the page names categories (“Payment providers”, “Identity verification”, “Email delivery”). Legal should insert the real processor list before launch. The info footer likewise drops “via Stripe Connect”.
+6. **Gold buttons (VC1, VC2, VC13).** Navy text on gold instead of white: white on `#c9a227` is ~2.3:1 and fails WCAG AA.
+7. **Policy “Download PDF”.** Opens the print dialog (“Save as PDF”) with a print stylesheet that strips site chrome; no pre-rendered PDFs exist. Point it at a backend URL if legal wants signed, versioned PDFs.
+8. **VC10 article counts.** The frame’s “24 articles” style counts imply a knowledge base that doesn’t exist; cards show the real number of FAQ answers per topic, or link to the relevant policy/page.
+9. **VC12 default tab.** The frame shows “Escrow & payments” selected; the page opens on “All” unless `?topic=` is set.
 
 ## Design gaps (please supply)
 
@@ -128,5 +153,7 @@ Legend — **Status:** ✅ implemented to the design · 🟡 implemented with a 
 | Campaign builder, category/size-chart editors, moderation rules, "Assign to" | Not designed | Omitted / read-only |
 | Admin user-detail sub-tabs (Listings, Orders, Wallet…) | Not designed | Empty state |
 | KYC hand-off QR | Needs real QR image | Placeholder icon; backend should return `handoff_qr_svg` or a signed image URL |
+| Help-centre knowledge base (VC10 “135 articles”) | Only FAQ answers and policies exist | Topic cards link to FAQ topics and policies; `/help/:slug` serves CMS articles |
+| Live chat | No provider chosen | Contact form; see deviation 4 |
 | Payment-method logos | Not supplied | Coloured monogram fallback; `logo` URL from API is rendered when present |
 | Locale / currency switcher UI ("English - USD") | Interaction not designed | Display only; preference saved under Settings → Preferences |

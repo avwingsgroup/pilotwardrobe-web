@@ -265,7 +265,7 @@ useSeo(() => {
             </template>
             <div v-else class="pw-pdp__returns">
               <RotateCcw :size="18" aria-hidden="true" />
-              <p>You have <strong>72 hours after landing</strong> to confirm the item matches the listing or open a dispute. Escrow stays frozen while a mediator reviews. <RouterLink to="/help/returns-refunds">Returns policy</RouterLink></p>
+              <p>You have <strong>72 hours after landing</strong> to confirm the item matches the listing or open a dispute. Escrow stays frozen while a mediator reviews. <RouterLink to="/returns">Returns policy</RouterLink></p>
             </div>
           </div>
         </div>

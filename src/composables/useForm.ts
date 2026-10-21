@@ -1,4 +1,4 @@
-import { computed, reactive, ref, type UnwrapRef } from 'vue'
+import { computed, reactive, ref, watch, type UnwrapRef } from 'vue'
 import { toApiError, type ApiError } from '@/api/errors'
 import { runValidators, type Validator } from '@/utils/validators'
 
@@ -31,6 +31,24 @@ export function useForm<T extends Record<string, unknown>>(initial: T, rules: Ru
     errors[key] = message ?? undefined
     return !message
   }
+
+  /*
+   * Once a field shows an error, re-check it as the user edits it so the message
+   * clears the moment the value is fixed (not on blur — a blur-time reflow can move
+   * the submit button out from under the pointer). New errors still wait for
+   * blur or submit. Only the edited field is re-checked, so server errors on
+   * other fields stay visible.
+   */
+  let snapshot = { ...(values as T) }
+  watch(
+    () => ({ ...(values as T) }),
+    (next) => {
+      for (const key of Object.keys(next) as (keyof T & string)[]) {
+        if (next[key] !== snapshot[key] && errors[key]) validateField(key)
+      }
+      snapshot = next
+    },
+  )
 
   function validate(): boolean {
     let ok = true

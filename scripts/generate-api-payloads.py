@@ -134,6 +134,13 @@ Buyer protection flow (VB8 open dispute, VB9 case view; AD9 staff mediation).
 - The seller has 48 h to respond (`respond_by`) before the case auto-escalates to `under_review`.
 - `POST /disputes/{id}/proposal/{accept|decline}` lets the buyer accept a seller's settlement proposal.
 """),
+    'support': ('Support (Help Center, contact)', """
+Help Center (VC10) and Contact us (VC11).
+
+- `GET /help/summary` drives “Most read this week” and the system-status panel. Status must come from real monitoring (one entry per day for the window); the SPA shows whatever `overall` says, so never hardcode `operational`.
+- `POST /contact` creates a support ticket. `topic ∈ order | escrow | dispute | selling | account | trust_safety | callback | other`. `phone` is required for `callback`; `order_id` must belong to the signed-in user; `attachment_ids` (≤ 5) are private media uploaded with `POST /media` (`type=message`). Visitors can contact support without an account.
+- Guides and policies (VC1–VC9) are static content in the SPA (`src/content/info`); timings quoted there (5-day dispatch, 72-hour inspection, 48-hour seller reply, 5-business-day mediation, 8% commission) must match the backend’s escrow and fee settings.
+"""),
     'admin': ('Admin (Control Tower)', """
 All `/admin/*` endpoints require a staff session (`role ∈ admin | super_admin`) **and** the specific permission listed in `docs/backend-api-contract.md`. Missing permission → **403 `FORBIDDEN`**. Every mutating admin call writes an audit-log entry (actor, action, target, IP, before/after).
 

@@ -9,12 +9,12 @@ import { useResource } from '@/composables/useResource'
 import { useSeo } from '@/composables/useSeo'
 import { formatShortDate } from '@/utils/date'
 
-/** CMS-managed pages (about, how it works, FAQ, legal, help articles — AD15). */
+/** CMS-managed help articles at /help/:slug (AD15). */
 const props = defineProps<{ slug: string }>()
 const slug = computed(() => props.slug)
 const { data, state, error, reload } = useResource((s) => contentService.page(slug.value, s), { watch: [slug] })
 
-useSeo(() => ({ title: data.value?.title ?? 'Pilotwardrobe', canonicalPath: `/${slug.value}`, type: 'article' }))
+useSeo(() => ({ title: data.value?.title ?? 'Pilotwardrobe', canonicalPath: `/help/${slug.value}`, type: 'article' }))
 </script>
 
 <template>

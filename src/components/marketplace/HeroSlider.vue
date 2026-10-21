@@ -51,7 +51,7 @@ onBeforeUnmount(stop)
       </div>
       <div class="pw-hero__ctas">
         <AppButton :to="current.link" size="lg">{{ current.buttonLabel }}</AppButton>
-        <RouterLink to="/how-it-works" class="pw-hero__link">How swapping works <ArrowRight :size="16" aria-hidden="true" /></RouterLink>
+        <RouterLink to="/how-to-swap" class="pw-hero__link">How swapping works <ArrowRight :size="16" aria-hidden="true" /></RouterLink>
       </div>
       <div class="pw-hero__progress">
         <span class="pw-hero__dots" aria-hidden="true">

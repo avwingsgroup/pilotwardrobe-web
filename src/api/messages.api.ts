@@ -7,6 +7,7 @@ import type {
   SendMessagePayload,
 } from '@/types'
 import type { ContentPage } from '@/types/admin'
+import type { ContactPayload, HelpSummary, SupportContactInfo } from '@/types/support'
 import { api } from './client'
 
 /**
@@ -63,8 +64,14 @@ export const contentService = {
   page(slug: string, signal?: AbortSignal) {
     return api.get<ContentPage>(`/pages/${encodeURIComponent(slug)}`, { signal })
   },
-  contact(payload: { name: string; email: string; topic: string; message: string; orderNumber?: string }) {
+  contact(payload: ContactPayload) {
     return api.post<{ ticket: string }>('/contact', payload)
+  },
+  helpSummary(signal?: AbortSignal) {
+    return api.get<HelpSummary>('/help/summary', { signal })
+  },
+  contactInfo(signal?: AbortSignal) {
+    return api.get<SupportContactInfo>('/support/contact-info', { signal })
   },
   subscribe(email: string) {
     return api.post<void>('/newsletter', { email })

@@ -1,0 +1,305 @@
+/*
+ * Information centre (VC1–VC13) building blocks, shared by the guide, policy and
+ * support pages. Loaded by PublicLayout (used when route.meta.info is set).
+ */
+
+/* ── Section bands ─────────────────────────────────────────────── */
+.pw-info-band {
+  padding: var(--pw-space-10) 0;
+}
+
+.pw-info-band--white {
+  background: var(--pw-surface);
+  border-top: 1px solid var(--pw-border);
+  border-bottom: 1px solid var(--pw-border);
+}
+
+.pw-info-band + .pw-info-band--white,
+.pw-info-band--white + .pw-info-band {
+  border-top: 0;
+}
+
+.pw-info-eyebrow {
+  font-size: var(--pw-text-2xs);
+  font-weight: var(--pw-weight-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pw-navy-700);
+}
+
+.pw-info-h2 {
+  margin-top: var(--pw-space-2);
+  font-size: clamp(1.375rem, 2.4vw, 1.75rem);
+  line-height: 1.2;
+  color: var(--pw-ink);
+}
+
+.pw-info-lead {
+  margin-top: var(--pw-space-2);
+  color: var(--pw-muted);
+  font-size: var(--pw-text-base);
+}
+
+.pw-info-head {
+  margin-bottom: var(--pw-space-6);
+}
+
+/* ── Grids & cards ─────────────────────────────────────────────── */
+.pw-info-grid {
+  display: grid;
+  gap: var(--pw-space-4);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 640px) {
+  .pw-info-grid--2,
+  .pw-info-grid--3,
+  .pw-info-grid--4,
+  .pw-info-grid--5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .pw-info-grid--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .pw-info-grid--4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .pw-info-grid--5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.pw-info-card {
+  padding: var(--pw-space-5);
+  border: 1px solid var(--pw-border);
+  border-radius: var(--pw-radius-lg);
+  background: var(--pw-surface);
+}
+
+.pw-info-card h3 {
+  margin-top: var(--pw-space-4);
+  font-size: var(--pw-text-md);
+  color: var(--pw-ink);
+}
+
+.pw-info-card p {
+  margin-top: var(--pw-space-2);
+  color: var(--pw-muted);
+  font-size: var(--pw-text-sm);
+  line-height: var(--pw-leading-relaxed);
+}
+
+.pw-info-card-title {
+  font-family: var(--pw-font-display);
+  font-size: var(--pw-text-md);
+  font-weight: var(--pw-weight-semibold);
+  color: var(--pw-ink);
+}
+
+/* Icon tiles: navy / gold / danger tints. */
+.pw-info-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--pw-radius-md);
+  background: var(--pw-navy-100);
+  color: var(--pw-navy-700);
+  flex: none;
+}
+
+.pw-info-icon--lg {
+  width: 40px;
+  height: 40px;
+}
+
+.pw-info-icon--gold {
+  background: var(--pw-gold-100);
+  color: var(--pw-gold-600);
+}
+
+.pw-info-icon--danger {
+  background: var(--pw-danger-100);
+  color: var(--pw-danger-600);
+}
+
+.pw-info-icon--solid {
+  background: var(--pw-navy-700);
+  color: #fff;
+}
+
+.pw-info-icon--success {
+  background: var(--pw-success-600);
+  color: #fff;
+}
+
+/* ── Callouts ──────────────────────────────────────────────────── */
+.pw-info-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--pw-space-3);
+  margin-top: var(--pw-space-5);
+  padding: var(--pw-space-4) var(--pw-space-5);
+  border-radius: var(--pw-radius-md);
+  background: var(--pw-warning-100);
+  color: var(--pw-ink-2);
+  font-size: var(--pw-text-sm);
+}
+
+.pw-info-callout svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--pw-gold-600);
+}
+
+.pw-info-callout--danger {
+  background: var(--pw-danger-100);
+}
+
+.pw-info-callout--danger svg {
+  color: var(--pw-danger-600);
+}
+
+/* ── Lists, tables, bars ───────────────────────────────────────── */
+.pw-info-checks {
+  display: grid;
+  gap: var(--pw-space-3);
+  font-size: var(--pw-text-sm);
+  color: var(--pw-ink-2);
+}
+
+.pw-info-checks li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--pw-space-3);
+}
+
+.pw-info-checks svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--pw-success-600);
+}
+
+.pw-info-table-wrap {
+  /* Containing block for sr-only cell labels, so they scroll with the table. */
+  position: relative;
+  overflow-x: auto;
+  border: 1px solid var(--pw-border);
+  border-radius: var(--pw-radius-lg);
+  background: var(--pw-surface);
+}
+
+.pw-info-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: var(--pw-text-sm);
+}
+
+.pw-info-table th,
+.pw-info-table td {
+  padding: var(--pw-space-3) var(--pw-space-4);
+  border-top: 1px solid var(--pw-border);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.pw-info-table thead th {
+  border-top: 0;
+  background: var(--pw-surface-sunken);
+  font-size: var(--pw-text-2xs);
+  font-weight: var(--pw-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pw-muted);
+}
+
+.pw-info-table tbody th {
+  font-weight: var(--pw-weight-medium);
+  color: var(--pw-ink);
+}
+
+.pw-info-table td {
+  color: var(--pw-ink-2);
+}
+
+.pw-info-bar {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--pw-navy-50);
+}
+
+.pw-info-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--pw-navy-700);
+}
+
+.pw-info-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--pw-radius-xs);
+  font-size: var(--pw-text-2xs);
+  font-weight: var(--pw-weight-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: var(--pw-navy-100);
+  color: var(--pw-navy-700);
+}
+
+.pw-info-pill--success {
+  background: var(--pw-success-100);
+  color: var(--pw-success-700);
+}
+
+.pw-info-pill--warning {
+  background: var(--pw-warning-100);
+  color: var(--pw-warning-700);
+}
+
+.pw-info-pill--neutral {
+  background: var(--pw-surface-sunken);
+  color: var(--pw-muted);
+}
+
+/* ── Numbered steps ────────────────────────────────────────────── */
+.pw-info-num {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--pw-navy-700);
+  color: #fff;
+  font-size: var(--pw-text-xs);
+  font-weight: var(--pw-weight-semibold);
+  flex: none;
+}
+
+.pw-info-num--gold {
+  background: var(--pw-gold-500);
+}
+
+.pw-info-num--success {
+  background: var(--pw-success-600);
+}
+
+@media (min-width: 768px) {
+  .pw-info-band {
+    padding: var(--pw-space-12) 0;
+  }
+}
+
+@media print {
+  .pw-info-band,
+  .pw-info-band--white {
+    padding: var(--pw-space-4) 0;
+    background: none;
+  }
+}

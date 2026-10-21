@@ -16,4 +16,5 @@ One file per domain. Every sample was produced by the in-browser mock server, wh
 - [Reviews](reviews.md)
 - [Notifications](notifications.md)
 - [Disputes](disputes.md)
+- [Support (Help Center, contact)](support.md)
 - [Admin (Control Tower)](admin.md)
