@@ -1,0 +1,152 @@
+/*
+ * Pilotwardrobe design tokens.
+ * Values are sampled from docs/pilotwardrobe-designs (1x frames; @2x frames divided by 2).
+ * Every component reads from these variables — no raw hex / px values in components
+ * except 1px hairlines.
+ */
+:root {
+  /* ── Brand ─────────────────────────────────────────── */
+  --pw-navy-950: #0a2147;
+  --pw-navy-900: #0d2a57; /* footer, wallet card, admin sidebar */
+  --pw-navy-800: #12305f;
+  --pw-navy-700: #16386e; /* primary buttons, section headings, logo */
+  --pw-navy-600: #234376;
+  --pw-navy-500: #3d5a8a;
+  --pw-navy-300: #8093b3;
+  --pw-navy-100: #e9eff8; /* info tint, chips, fit-kit callout */
+  --pw-navy-50: #f2f5fb;
+
+  --pw-gold-600: #b08a17;
+  --pw-gold-500: #c9a227; /* badges, wallet progress, subscribe */
+  --pw-gold-400: #e2c15a; /* hero accent text on navy */
+  --pw-gold-100: #f8f0d6;
+
+  /* ── Neutrals ──────────────────────────────────────── */
+  --pw-ink: #101a2d; /* primary text */
+  --pw-ink-2: #344055;
+  --pw-muted: #5b6577; /* secondary text */
+  --pw-subtle: #8a93a3; /* tertiary / placeholder */
+  --pw-disabled: #c6cdd9;
+  --pw-border: #e3e7ee;
+  --pw-border-strong: #cfd5df;
+  --pw-surface: #ffffff;
+  --pw-surface-sunken: #f5f6f9; /* page background */
+  --pw-surface-raised: #ffffff;
+  --pw-overlay: rgb(16 26 45 / 55%);
+
+  /* ── Status ────────────────────────────────────────── */
+  --pw-success-700: #16714a;
+  --pw-success-600: #1c8a52;
+  --pw-success-100: #e6f4ec;
+  --pw-warning-700: #8f5d12;
+  --pw-warning-600: #b7791f;
+  --pw-warning-100: #fdf3e0;
+  --pw-danger-700: #a8322a;
+  --pw-danger-600: #c43d33;
+  --pw-danger-100: #fdebe9;
+  --pw-info-600: var(--pw-navy-700);
+  --pw-info-100: var(--pw-navy-100);
+
+  /* ── Semantic aliases ──────────────────────────────── */
+  --pw-color-primary: var(--pw-navy-700);
+  --pw-color-primary-hover: var(--pw-navy-800);
+  --pw-color-accent: var(--pw-gold-500);
+  --pw-color-focus: #2f6fdb;
+
+  /* ── Typography ────────────────────────────────────── */
+  --pw-font-display: 'Space Grotesk Variable', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --pw-font-body: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --pw-font-mono: ui-monospace, 'SFMono-Regular', 'JetBrains Mono', Menlo, Consolas, monospace;
+
+  --pw-weight-regular: 400;
+  --pw-weight-medium: 500;
+  --pw-weight-semibold: 600;
+  --pw-weight-bold: 700;
+
+  --pw-text-2xs: 0.6875rem; /* 11 — badges */
+  --pw-text-xs: 0.75rem; /* 12 — meta */
+  --pw-text-sm: 0.8125rem; /* 13 — secondary, admin tables (12.5 design) */
+  --pw-text-base: 0.875rem; /* 14 — body */
+  --pw-text-md: 1rem; /* 16 */
+  --pw-text-lg: 1.125rem; /* 18 — card headings */
+  --pw-text-xl: 1.375rem; /* 22 — section headings */
+  --pw-text-2xl: 1.75rem; /* 28 — page titles */
+  --pw-text-3xl: 2.25rem; /* 36 — auth headings */
+  --pw-text-4xl: 3rem; /* 48 — home hero */
+
+  --pw-leading-tight: 1.2;
+  --pw-leading-snug: 1.35;
+  --pw-leading-normal: 1.5;
+  --pw-leading-relaxed: 1.65;
+
+  /* ── Spacing (4px grid) ────────────────────────────── */
+  --pw-space-0: 0;
+  --pw-space-1: 0.25rem;
+  --pw-space-2: 0.5rem;
+  --pw-space-3: 0.75rem;
+  --pw-space-4: 1rem;
+  --pw-space-5: 1.25rem;
+  --pw-space-6: 1.5rem;
+  --pw-space-8: 2rem;
+  --pw-space-10: 2.5rem;
+  --pw-space-12: 3rem;
+  --pw-space-16: 4rem;
+  --pw-space-20: 5rem;
+
+  /* ── Radius ────────────────────────────────────────── */
+  --pw-radius-xs: 4px;
+  --pw-radius-sm: 6px;
+  --pw-radius-md: 8px; /* buttons, inputs */
+  --pw-radius-lg: 12px; /* cards */
+  --pw-radius-xl: 16px; /* modals */
+  --pw-radius-full: 999px;
+
+  /* ── Elevation ─────────────────────────────────────── */
+  --pw-shadow-xs: 0 1px 2px rgb(16 26 45 / 5%);
+  --pw-shadow-sm: 0 1px 3px rgb(16 26 45 / 8%), 0 1px 2px rgb(16 26 45 / 4%);
+  --pw-shadow-md: 0 6px 16px rgb(16 26 45 / 8%);
+  --pw-shadow-lg: 0 18px 48px rgb(16 26 45 / 18%);
+
+  /* ── Layout ────────────────────────────────────────── */
+  --pw-container: 1360px;
+  --pw-container-narrow: 960px;
+  --pw-gutter: 1rem;
+  --pw-header-h: 72px;
+  --pw-admin-sidebar-w: 248px;
+  --pw-hangar-sidebar-w: 248px;
+  --pw-touch: 44px;
+
+  /* ── Z-index scale ─────────────────────────────────── */
+  --pw-z-base: 1;
+  --pw-z-sticky: 20;
+  --pw-z-header: 40;
+  --pw-z-drawer: 60;
+  --pw-z-modal: 80;
+  --pw-z-toast: 100;
+
+  /* ── Motion ────────────────────────────────────────── */
+  --pw-ease: cubic-bezier(0.2, 0, 0, 1);
+  --pw-duration-fast: 120ms;
+  --pw-duration: 200ms;
+  --pw-duration-slow: 320ms;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --pw-gutter: 1.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --pw-gutter: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --pw-duration-fast: 0ms;
+    --pw-duration: 0ms;
+    --pw-duration-slow: 0ms;
+  }
+}

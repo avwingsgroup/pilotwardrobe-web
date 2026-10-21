@@ -1,0 +1,366 @@
+{
+  "bose-a20": {
+    "width": 1408,
+    "height": 768,
+    "widths": [
+      320,
+      640,
+      960,
+      1408
+    ],
+    "alt": "Bose A20 aviation headset with dual GA plugs on a light surface",
+    "kind": "product",
+    "edge": "#dddddd"
+  },
+  "lightspeed-zulu-3": {
+    "width": 300,
+    "height": 284,
+    "widths": [
+      300
+    ],
+    "alt": "Lightspeed Zulu 3 ANR headset with bronze ear cups",
+    "kind": "product",
+    "edge": "#f5f6fa"
+  },
+  "david-clark-h10": {
+    "width": 300,
+    "height": 284,
+    "widths": [
+      300
+    ],
+    "alt": "David Clark H10-13.4 passive headset",
+    "kind": "product",
+    "edge": "#f5f6fa"
+  },
+  "david-clark-onex": {
+    "width": 232,
+    "height": 230,
+    "widths": [
+      232
+    ],
+    "alt": "David Clark ONE-X ENC headset",
+    "kind": "product",
+    "edge": "#f5f6fa"
+  },
+  "randolph-aviator": {
+    "width": 300,
+    "height": 284,
+    "widths": [
+      300
+    ],
+    "alt": "Black aviator sunglasses with green lenses",
+    "kind": "product",
+    "edge": "#f5f6fa"
+  },
+  "uniform-shirt": {
+    "width": 232,
+    "height": 230,
+    "widths": [
+      232
+    ],
+    "alt": "White pilot uniform shirt with four-bar epaulettes and black tie",
+    "kind": "product",
+    "edge": "#f5f6fa"
+  },
+  "captain-jacket": {
+    "width": 232,
+    "height": 230,
+    "widths": [
+      232
+    ],
+    "alt": "Navy double-breasted captain's uniform jacket with gold sleeve stripes",
+    "kind": "product",
+    "edge": "#f5f6fa"
+  },
+  "jeppesen-flight-bag": {
+    "width": 232,
+    "height": 230,
+    "widths": [
+      232
+    ],
+    "alt": "Black Jeppesen Captain flight bag",
+    "kind": "product",
+    "edge": "#f5f6fa"
+  },
+  "altimeter-smartwatch": {
+    "width": 232,
+    "height": 230,
+    "widths": [
+      232
+    ],
+    "alt": "Altimeter smartwatch with mesh strap",
+    "kind": "product",
+    "edge": "#f5f6fa"
+  },
+  "pilot-chronograph": {
+    "width": 120,
+    "height": 120,
+    "widths": [
+      120
+    ],
+    "alt": "Stainless steel pilot chronograph watch with blue dial",
+    "kind": "product",
+    "edge": "#f5f6fa"
+  },
+  "leg-kneeboard": {
+    "width": 120,
+    "height": 120,
+    "widths": [
+      120
+    ],
+    "alt": "Black leg-strap kneeboard",
+    "kind": "product",
+    "edge": "#f5f6fa"
+  },
+  "tri-fold-kneeboard": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      320,
+      640,
+      960,
+      1440
+    ],
+    "alt": "Tri-fold aviation kneeboard with checklist clip",
+    "kind": "product",
+    "edge": "#f5f6fa"
+  },
+  "tablet-kneeboard": {
+    "width": 2816,
+    "height": 1536,
+    "widths": [
+      320,
+      640,
+      960,
+      1440
+    ],
+    "alt": "iPad kneeboard with moving map and leather checklist folio",
+    "kind": "product",
+    "edge": "#8a888c"
+  },
+  "e6b-flight-computer": {
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      320,
+      640,
+      960,
+      1254
+    ],
+    "alt": "E6B circular flight computer on a black pad",
+    "kind": "product",
+    "edge": "#f8f8f8"
+  },
+  "garmin-handheld-gps": {
+    "width": 1024,
+    "height": 1536,
+    "widths": [
+      320,
+      640,
+      960,
+      1024
+    ],
+    "alt": "Garmin handheld aviation GPS with moving map",
+    "kind": "product",
+    "edge": "#fefefe"
+  },
+  "com-radio": {
+    "width": 1402,
+    "height": 1122,
+    "widths": [
+      320,
+      640,
+      960,
+      1402
+    ],
+    "alt": "Panel-mount aircraft communication radio with handheld mic",
+    "kind": "product",
+    "edge": "#fefefe"
+  },
+  "portable-oxygen": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      640,
+      960,
+      1122
+    ],
+    "alt": "Portable aviation oxygen cylinder in carry case with mask",
+    "kind": "product",
+    "edge": "#fefefe"
+  },
+  "fuel-tester": {
+    "width": 2816,
+    "height": 1536,
+    "widths": [
+      320,
+      640,
+      960,
+      1440
+    ],
+    "alt": "Aviation fuel sampler tester on a cockpit glare shield",
+    "kind": "product",
+    "edge": "#453f39"
+  },
+  "pilot-flight-bag": {
+    "width": 1402,
+    "height": 1122,
+    "widths": [
+      320,
+      640,
+      960,
+      1402
+    ],
+    "alt": "Black pilot flight bag with wings emblem",
+    "kind": "product",
+    "edge": "#fefefe"
+  },
+  "power-bank-black": {
+    "width": 1402,
+    "height": 1122,
+    "widths": [
+      320,
+      640,
+      960,
+      1402
+    ],
+    "alt": "Black 4-port USB power bank",
+    "kind": "product",
+    "edge": "#fefefe"
+  },
+  "power-bank-desk": {
+    "width": 2752,
+    "height": 1536,
+    "widths": [
+      320,
+      640,
+      960,
+      1440
+    ],
+    "alt": "Portable power bank charging a phone on a desk",
+    "kind": "product",
+    "edge": "#c1aaa0"
+  },
+  "action-camera": {
+    "width": 1402,
+    "height": 1122,
+    "widths": [
+      320,
+      640,
+      960,
+      1402
+    ],
+    "alt": "GoPro-style action camera on a mount",
+    "kind": "product",
+    "edge": "#fefefe"
+  },
+  "canon-eos-90d": {
+    "width": 1402,
+    "height": 1122,
+    "widths": [
+      320,
+      640,
+      960,
+      1402
+    ],
+    "alt": "Canon EOS 90D DSLR camera with zoom lens",
+    "kind": "product",
+    "edge": "#fefefe"
+  },
+  "compact-drone": {
+    "width": 2752,
+    "height": 1536,
+    "widths": [
+      320,
+      640,
+      960,
+      1440
+    ],
+    "alt": "Compact folding drone with controller",
+    "kind": "product",
+    "edge": "#e0d9d3"
+  },
+  "digital-multimeter": {
+    "width": 2752,
+    "height": 1536,
+    "widths": [
+      320,
+      640,
+      960,
+      1440
+    ],
+    "alt": "Digital multimeter testing avionics wiring",
+    "kind": "product",
+    "edge": "#58453f"
+  },
+  "photo-santorini-rollout": {
+    "width": 598,
+    "height": 392,
+    "widths": [
+      320,
+      598
+    ],
+    "alt": "Airliner rolling out beneath a mountain on Santorini",
+    "kind": "photo",
+    "edge": "#9ab7bb"
+  },
+  "photo-wing-view": {
+    "width": 598,
+    "height": 392,
+    "widths": [
+      320,
+      598
+    ],
+    "alt": "View over a light aircraft wing above snowy terrain",
+    "kind": "photo",
+    "edge": "#1b1819"
+  },
+  "photo-warbird-formation": {
+    "width": 598,
+    "height": 392,
+    "widths": [
+      320,
+      598
+    ],
+    "alt": "Black-and-white warbird formation trailing smoke",
+    "kind": "photo",
+    "edge": "#bfbfbf"
+  },
+  "photo-gate-sunset": {
+    "width": 399,
+    "height": 392,
+    "widths": [
+      320,
+      399
+    ],
+    "alt": "Airliner nose at the gate during a dramatic sunset",
+    "kind": "photo",
+    "edge": "#35686f"
+  },
+  "photo-formation-pair": {
+    "width": 598,
+    "height": 392,
+    "widths": [
+      320,
+      598
+    ],
+    "alt": "Two light aircraft flying in formation at dusk",
+    "kind": "photo",
+    "edge": "#8d9091"
+  },
+  "hero-cockpit": {
+    "width": 2816,
+    "height": 1536,
+    "widths": [
+      640,
+      960,
+      1440,
+      1920,
+      2560
+    ],
+    "alt": "Pilot's lap in a light-aircraft cockpit with headset and iPad kneeboard",
+    "kind": "hero",
+    "edge": "#a9a89d"
+  }
+}

@@ -1,0 +1,28 @@
+import pluginVue from 'eslint-plugin-vue'
+import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
+import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
+
+export default defineConfigWithVueTs(
+  {
+    name: 'app/files-to-lint',
+    files: ['**/*.{ts,mts,tsx,vue}'],
+  },
+  {
+    name: 'app/files-to-ignore',
+    ignores: ['**/dist/**', '**/coverage/**', '**/node_modules/**', 'playwright-report/**', 'test-results/**'],
+  },
+  pluginVue.configs['flat/recommended'],
+  vueTsConfigs.recommended,
+  {
+    name: 'app/rules',
+    rules: {
+      'vue/multi-word-component-names': 'off',
+      'vue/no-v-html': 'error',
+      'vue/require-default-prop': 'off',
+      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
+    },
+  },
+  skipFormatting,
+)

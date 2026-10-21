@@ -1,0 +1,20 @@
+node_modules
+dist
+dist-ssr
+coverage
+*.local
+.env
+.env.*
+!.env.example
+playwright-report
+test-results
+*.tsbuildinfo
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea
+.payloads.json
+
+# Large design sources (kept locally; API/handoff docs stay tracked)
+docs/pilotwardrobe-designs/
+docs/PW-images/
