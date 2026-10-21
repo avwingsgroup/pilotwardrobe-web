@@ -249,8 +249,8 @@ Response `200`:
     "favorites_count": 38,
     "offers_count": 0,
     "is_favorited": false,
-    "created_at": "2026-10-20T03:50:12.645Z",
-    "updated_at": "2026-10-20T03:50:12.645Z"
+    "created_at": "2026-10-20T07:08:31.261Z",
+    "updated_at": "2026-10-20T07:08:31.261Z"
   }
 }
 ```
@@ -407,8 +407,8 @@ Response `200`:
       "favorites_count": 38,
       "offers_count": 0,
       "is_favorited": false,
-      "created_at": "2026-10-20T13:50:12.645Z",
-      "updated_at": "2026-10-20T13:50:12.645Z"
+      "created_at": "2026-10-20T17:08:31.261Z",
+      "updated_at": "2026-10-20T17:08:31.261Z"
     },
     {
       "id": "lst_004",
@@ -589,8 +589,8 @@ Response `200`:
       "favorites_count": 38,
       "offers_count": 3,
       "is_favorited": true,
-      "created_at": "2026-10-19T05:50:12.645Z",
-      "updated_at": "2026-10-19T05:50:12.645Z"
+      "created_at": "2026-10-19T09:08:31.261Z",
+      "updated_at": "2026-10-19T09:08:31.261Z"
     },
     "… 2 more"
   ]
@@ -1120,8 +1120,8 @@ Response `200`:
             "favorites_count": 38,
             "offers_count": 0,
             "is_favorited": false,
-            "created_at": "2026-10-20T13:50:12.645Z",
-            "updated_at": "2026-10-20T13:50:12.645Z"
+            "created_at": "2026-10-20T17:08:31.261Z",
+            "updated_at": "2026-10-20T17:08:31.261Z"
           },
           {
             "id": "lst_003",
@@ -1350,8 +1350,8 @@ Response `200`:
             "favorites_count": 38,
             "offers_count": 0,
             "is_favorited": false,
-            "created_at": "2026-10-20T03:50:12.645Z",
-            "updated_at": "2026-10-20T03:50:12.645Z"
+            "created_at": "2026-10-20T07:08:31.261Z",
+            "updated_at": "2026-10-20T07:08:31.261Z"
           },
           "… 2 more"
         ]
@@ -1540,8 +1540,8 @@ Response `200`:
             "favorites_count": 38,
             "offers_count": 0,
             "is_favorited": false,
-            "created_at": "2026-10-18T11:50:12.645Z",
-            "updated_at": "2026-10-18T11:50:12.645Z"
+            "created_at": "2026-10-18T15:08:31.261Z",
+            "updated_at": "2026-10-18T15:08:31.261Z"
           },
           {
             "id": "lst_006",
@@ -1684,8 +1684,8 @@ Response `200`:
             "favorites_count": 38,
             "offers_count": 0,
             "is_favorited": false,
-            "created_at": "2026-10-17T15:50:12.645Z",
-            "updated_at": "2026-10-17T15:50:12.645Z"
+            "created_at": "2026-10-17T19:08:31.261Z",
+            "updated_at": "2026-10-17T19:08:31.261Z"
           },
           "… 2 more"
         ]

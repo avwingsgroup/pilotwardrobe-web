@@ -20,10 +20,10 @@ const columns = [
     title: 'Sell / swap',
     links: [
       { label: 'Start selling', to: '/hangar/listings/new' },
-      { label: 'How to sell', to: '/how-it-works' },
-      { label: 'How to swap', to: '/how-it-works#swapping' },
-      { label: 'Freight guide', to: '/help/freight-guide' },
-      { label: 'Seller fees', to: '/help/seller-fees' },
+      { label: 'How to sell', to: '/how-to-sell' },
+      { label: 'How to swap', to: '/how-to-swap' },
+      { label: 'Freight guide', to: '/freight-guide' },
+      { label: 'Seller fees', to: '/seller-fees' },
     ],
   },
   {
@@ -31,15 +31,15 @@ const columns = [
     links: [
       { label: 'Terms of service', to: '/terms' },
       { label: 'Privacy policy', to: '/privacy' },
-      { label: 'Returns & refunds', to: '/help/returns-refunds' },
-      { label: 'Escrow & disputes', to: '/faq' },
+      { label: 'Returns & refunds', to: '/returns' },
+      { label: 'Escrow & disputes', to: '/escrow-disputes' },
       { label: 'Cookies', to: '/cookies' },
     ],
   },
   {
     title: 'Help',
     links: [
-      { label: 'Help centre', to: '/faq' },
+      { label: 'Help centre', to: '/help' },
       { label: 'Fit Kit & sizing', to: '/hangar/fit-kit' },
       { label: 'Contact us', to: '/contact' },
       { label: 'FAQs', to: '/faq' },

@@ -13,7 +13,23 @@ const pub = {
   photographer: () => import('@/views/public/PhotographerStorefrontPage.vue'),
   directory: () => import('@/views/public/DirectoryPage.vue'),
   content: () => import('@/views/public/ContentPage.vue'),
-  contact: () => import('@/views/public/ContactPage.vue'),
+}
+
+/** Information centre (VC1–VC13): guides, policies and support. */
+const info = {
+  howToSwap: () => import('@/views/info/HowToSwapPage.vue'),
+  howToSell: () => import('@/views/info/HowToSellPage.vue'),
+  freight: () => import('@/views/info/FreightGuidePage.vue'),
+  sellerFees: () => import('@/views/info/SellerFeesPage.vue'),
+  terms: () => import('@/views/info/TermsPage.vue'),
+  privacy: () => import('@/views/info/PrivacyPage.vue'),
+  returns: () => import('@/views/info/ReturnsPage.vue'),
+  escrow: () => import('@/views/info/EscrowDisputesPage.vue'),
+  cookies: () => import('@/views/info/CookiesPage.vue'),
+  help: () => import('@/views/info/HelpCenterPage.vue'),
+  contact: () => import('@/views/info/ContactPage.vue'),
+  faq: () => import('@/views/info/FaqPage.vue'),
+  about: () => import('@/views/info/AboutPage.vue'),
 }
 
 const auth = {
@@ -112,14 +128,29 @@ export const routes: RouteRecordRaw[] = [
       { path: 'photographers', name: 'photographers', component: pub.directory, props: { type: 'photographer' }, meta: { nav: 'photographers', title: 'Aviation photographers' } },
       { path: 'photographers/:username', name: 'photographer', component: pub.photographer, meta: { nav: 'photographers' } },
       { path: 'photography', redirect: { name: 'photographers' } },
-      { path: 'about', name: 'about', component: pub.content, props: { slug: 'about' } },
-      { path: 'how-it-works', name: 'how-it-works', component: pub.content, props: { slug: 'how-it-works' } },
-      { path: 'faq', name: 'faq', component: pub.content, props: { slug: 'faq' } },
-      { path: 'terms', name: 'terms', component: pub.content, props: { slug: 'terms' } },
-      { path: 'privacy', name: 'privacy', component: pub.content, props: { slug: 'privacy' } },
-      { path: 'cookies', name: 'cookies', component: pub.content, props: { slug: 'cookies' } },
-      { path: 'help/:slug', name: 'help', component: pub.content, props: true },
-      { path: 'contact', name: 'contact', component: pub.contact, meta: { title: 'Contact us' } },
+
+      /* ── Information centre (VC1–VC13) ── */
+      { path: 'how-to-swap', name: 'how-to-swap', component: info.howToSwap, meta: { info: true, title: 'How to swap' } },
+      { path: 'how-to-sell', name: 'how-to-sell', component: info.howToSell, meta: { info: true, title: 'How to sell' } },
+      { path: 'freight-guide', name: 'freight-guide', component: info.freight, meta: { info: true, title: 'Freight guide' } },
+      { path: 'seller-fees', name: 'seller-fees', component: info.sellerFees, meta: { info: true, title: 'Seller fees' } },
+      { path: 'terms', name: 'terms', component: info.terms, meta: { info: true, title: 'Terms of service' } },
+      { path: 'privacy', name: 'privacy', component: info.privacy, meta: { info: true, title: 'Privacy policy' } },
+      { path: 'returns', name: 'returns', component: info.returns, meta: { info: true, title: 'Returns & refunds' } },
+      { path: 'escrow-disputes', name: 'escrow-disputes', component: info.escrow, meta: { info: true, title: 'Escrow & disputes' } },
+      { path: 'cookies', name: 'cookies', component: info.cookies, meta: { info: true, title: 'Cookie policy' } },
+      { path: 'help', name: 'help-center', component: info.help, meta: { info: true, title: 'Help Center' } },
+      { path: 'help/:slug', name: 'help', component: pub.content, props: true, meta: { info: true } },
+      { path: 'contact', name: 'contact', component: info.contact, meta: { info: true, title: 'Contact us' } },
+      { path: 'faq', name: 'faq', component: info.faq, meta: { info: true, title: 'FAQs' } },
+      { path: 'about', name: 'about', component: info.about, meta: { info: true, title: 'About us' } },
+      /* Earlier URLs for the same content. */
+      { path: 'how-it-works', name: 'how-it-works', redirect: { name: 'how-to-swap' } },
+      { path: 'help/freight-guide', redirect: { name: 'freight-guide' } },
+      { path: 'help/seller-fees', redirect: { name: 'seller-fees' } },
+      { path: 'help/returns-refunds', redirect: { name: 'returns' } },
+      { path: 'returns-refunds', redirect: { name: 'returns' } },
+      { path: 'help-center', redirect: { name: 'help-center' } },
 
       /* ── Authenticated consumer areas sharing the public header ── */
       { path: 'sell', name: 'sell', redirect: { name: 'listing-new' }, meta: { nav: 'sell' } },

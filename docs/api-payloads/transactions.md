@@ -65,7 +65,7 @@ Response `200`:
   "data": [
     {
       "id": "tx_1",
-      "occurred_at": "2026-10-20T09:50:12.702Z",
+      "occurred_at": "2026-10-20T13:08:31.290Z",
       "description": "Sale · Aviator Uniform Shirt",
       "detail": "Order #PW-4468 · fee $11.60",
       "type": "sale",
@@ -79,7 +79,7 @@ Response `200`:
     },
     {
       "id": "tx_2",
-      "occurred_at": "2026-10-18T09:50:12.702Z",
+      "occurred_at": "2026-10-18T13:08:31.290Z",
       "description": "Sale · Jeppesen Captain Flight Bag",
       "detail": "Order #PW-4471",
       "type": "sale",
@@ -178,8 +178,8 @@ Response `200`:
       "currency": "NGN"
     },
     "arrives_between": {
-      "from": "2026-10-22T09:50:13.079Z",
-      "to": "2026-10-23T09:50:13.079Z"
+      "from": "2026-10-22T13:08:31.554Z",
+      "to": "2026-10-23T13:08:31.554Z"
     },
     "requires_two_factor": false
   }
@@ -208,8 +208,8 @@ Response `201`:
   "success": true,
   "message": "Withdrawal requested.",
   "data": {
-    "id": "tx_zkjh819",
-    "occurred_at": "2026-10-21T09:50:13.080Z",
+    "id": "tx_6tqr2ig",
+    "occurred_at": "2026-10-21T13:08:31.554Z",
     "description": "Payout to GTBank · NGN •••• 0921",
     "detail": "Processing",
     "type": "withdrawal",

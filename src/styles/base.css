@@ -280,6 +280,8 @@ hr {
 }
 
 .pw-scroll-x {
+  /* Containing block for absolutely positioned descendants (e.g. sr-only labels). */
+  position: relative;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }

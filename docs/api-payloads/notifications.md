@@ -28,7 +28,7 @@ Response `200`:
       "title": "New offer — $712 on Bose A20",
       "body": "Kunle T. · expires in 9h",
       "read_at": null,
-      "created_at": "2026-10-21T09:48:12.723Z",
+      "created_at": "2026-10-21T13:06:31.303Z",
       "actions": [
         {
           "label": "Review offer",
@@ -44,7 +44,7 @@ Response `200`:
       "title": "Order #PW-4471 is airborne",
       "body": "Departed LOS sort facility · ETA Aug 2–4",
       "read_at": null,
-      "created_at": "2026-10-21T06:50:12.723Z",
+      "created_at": "2026-10-21T10:08:31.303Z",
       "link": "/hangar/orders/ord_4471"
     }
   ],
@@ -95,8 +95,8 @@ Response `200`:
     "icon": "offer",
     "title": "New offer — $712 on Bose A20",
     "body": "Kunle T. · expires in 9h",
-    "read_at": "2026-10-21T09:50:13.088Z",
-    "created_at": "2026-10-21T09:48:12.723Z",
+    "read_at": "2026-10-21T13:08:31.560Z",
+    "created_at": "2026-10-21T13:06:31.303Z",
     "actions": [
       {
         "label": "Review offer",

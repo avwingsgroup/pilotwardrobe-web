@@ -127,7 +127,7 @@ Response `200`:
   "success": true,
   "data": {
     "status": "two_factor_required",
-    "challenge_id": "2fa_m6wzzni",
+    "challenge_id": "2fa_f61ym65",
     "methods": [
       "totp",
       "sms",
@@ -199,7 +199,7 @@ Response `201`:
   "message": "Account created. Check your email for a 4-digit code.",
   "data": {
     "user": {
-      "id": "usr_cqa8kk3",
+      "id": "usr_lkz4ic2",
       "first_name": "Ada",
       "last_name": "Obi",
       "display_name": "Ada Obi",
@@ -224,7 +224,7 @@ Response `201`:
       "currency": "USD",
       "locale": "en",
       "two_factor_enabled": false,
-      "member_since": "2026-10-21T09:50:12.981Z",
+      "member_since": "2026-10-21T13:08:31.477Z",
       "counters": {
         "unread_messages": 0,
         "unread_notifications": 0,
@@ -310,7 +310,7 @@ Response `200`:
   "success": true,
   "message": "Email verified.",
   "data": {
-    "id": "usr_cqa8kk3",
+    "id": "usr_lkz4ic2",
     "first_name": "Ada",
     "last_name": "Obi",
     "display_name": "Ada Obi",
@@ -335,7 +335,7 @@ Response `200`:
     "currency": "USD",
     "locale": "en",
     "two_factor_enabled": false,
-    "member_since": "2026-10-21T09:50:12.981Z",
+    "member_since": "2026-10-21T13:08:31.477Z",
     "counters": {
       "unread_messages": 0,
       "unread_notifications": 0,
@@ -528,7 +528,7 @@ Response `200`:
 {
   "success": true,
   "data": {
-    "url": "/auth/google/callback?provider=google&code=mock-new&state=st_rwsdxfs"
+    "url": "/auth/google/callback?provider=google&code=mock-new&state=st_bkdmyhu"
   }
 }
 ```

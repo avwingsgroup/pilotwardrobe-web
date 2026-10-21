@@ -44,8 +44,8 @@ Response `200`:
         "display_name": "Amaka N.",
         "initials": "AN"
       },
-      "opened_at": "2026-10-18T09:50:12.734Z",
-      "decision_due_at": "2026-10-23T09:50:12.734Z",
+      "opened_at": "2026-10-18T13:08:31.311Z",
+      "decision_due_at": "2026-10-23T13:08:31.311Z",
       "description": "Label reads S. Chest 98 cm vs listing 104 cm. Requesting a $45 partial refund. 2 photos attached.",
       "evidence": [
         {
@@ -122,7 +122,7 @@ Response `200`:
             "role": "buyer"
           },
           "body": "Label reads S. Chest 98 cm vs listing 104 cm. Requesting a $45 partial refund. 2 photos attached.",
-          "created_at": "2026-10-18T09:50:12.734Z"
+          "created_at": "2026-10-18T13:08:31.311Z"
         },
         {
           "id": "dm_2",
@@ -132,7 +132,7 @@ Response `200`:
             "role": "seller"
           },
           "body": "The shirt was listed as M as per the original tag. Happy to accept a return for a full refund.",
-          "created_at": "2026-10-19T09:50:12.734Z"
+          "created_at": "2026-10-19T13:08:31.311Z"
         },
         "… 1 more"
       ],
@@ -238,8 +238,8 @@ Response `200`:
       "display_name": "Amaka N.",
       "initials": "AN"
     },
-    "opened_at": "2026-10-18T09:50:12.734Z",
-    "decision_due_at": "2026-10-23T09:50:12.734Z",
+    "opened_at": "2026-10-18T13:08:31.311Z",
+    "decision_due_at": "2026-10-23T13:08:31.311Z",
     "description": "Label reads S. Chest 98 cm vs listing 104 cm. Requesting a $45 partial refund. 2 photos attached.",
     "evidence": [
       {
@@ -316,7 +316,7 @@ Response `200`:
           "role": "buyer"
         },
         "body": "Label reads S. Chest 98 cm vs listing 104 cm. Requesting a $45 partial refund. 2 photos attached.",
-        "created_at": "2026-10-18T09:50:12.734Z"
+        "created_at": "2026-10-18T13:08:31.311Z"
       },
       {
         "id": "dm_2",
@@ -326,7 +326,7 @@ Response `200`:
           "role": "seller"
         },
         "body": "The shirt was listed as M as per the original tag. Happy to accept a return for a full refund.",
-        "created_at": "2026-10-19T09:50:12.734Z"
+        "created_at": "2026-10-19T13:08:31.311Z"
       },
       "… 1 more"
     ],
@@ -475,8 +475,8 @@ Response `200`:
       "display_name": "Amaka N.",
       "initials": "AN"
     },
-    "opened_at": "2026-10-18T09:50:12.734Z",
-    "decision_due_at": "2026-10-23T09:50:12.734Z",
+    "opened_at": "2026-10-18T13:08:31.311Z",
+    "decision_due_at": "2026-10-23T13:08:31.311Z",
     "description": "Label reads S. Chest 98 cm vs listing 104 cm. Requesting a $45 partial refund. 2 photos attached.",
     "evidence": [
       {
@@ -553,7 +553,7 @@ Response `200`:
           "role": "buyer"
         },
         "body": "Label reads S. Chest 98 cm vs listing 104 cm. Requesting a $45 partial refund. 2 photos attached.",
-        "created_at": "2026-10-18T09:50:12.734Z"
+        "created_at": "2026-10-18T13:08:31.311Z"
       },
       {
         "id": "dm_2",
@@ -563,7 +563,7 @@ Response `200`:
           "role": "seller"
         },
         "body": "The shirt was listed as M as per the original tag. Happy to accept a return for a full refund.",
-        "created_at": "2026-10-19T09:50:12.734Z"
+        "created_at": "2026-10-19T13:08:31.311Z"
       },
       "… 2 more"
     ],
@@ -668,8 +668,8 @@ Response `200`:
       "display_name": "Amaka N.",
       "initials": "AN"
     },
-    "opened_at": "2026-10-18T09:50:12.734Z",
-    "decision_due_at": "2026-10-23T09:50:12.734Z",
+    "opened_at": "2026-10-18T13:08:31.311Z",
+    "decision_due_at": "2026-10-23T13:08:31.311Z",
     "description": "Label reads S. Chest 98 cm vs listing 104 cm. Requesting a $45 partial refund. 2 photos attached.",
     "evidence": [
       {
@@ -746,7 +746,7 @@ Response `200`:
           "role": "buyer"
         },
         "body": "Label reads S. Chest 98 cm vs listing 104 cm. Requesting a $45 partial refund. 2 photos attached.",
-        "created_at": "2026-10-18T09:50:12.734Z"
+        "created_at": "2026-10-18T13:08:31.311Z"
       },
       {
         "id": "dm_2",
@@ -756,7 +756,7 @@ Response `200`:
           "role": "seller"
         },
         "body": "The shirt was listed as M as per the original tag. Happy to accept a return for a full refund.",
-        "created_at": "2026-10-19T09:50:12.734Z"
+        "created_at": "2026-10-19T13:08:31.311Z"
       },
       "… 2 more"
     ],

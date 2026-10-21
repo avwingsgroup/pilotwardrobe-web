@@ -85,7 +85,7 @@ Response `200`:
         "reserved": false
       },
       "last_message_preview": "Offer: $712 for the Bose A20",
-      "last_message_at": "2026-10-21T09:48:12.714Z",
+      "last_message_at": "2026-10-21T13:06:31.297Z",
       "unread_count": 1
     },
     {
@@ -147,7 +147,7 @@ Response `200`:
         "reserved": false
       },
       "last_message_preview": "Swap: Zulu 3 + $180?",
-      "last_message_at": "2026-10-21T08:50:12.714Z",
+      "last_message_at": "2026-10-21T12:08:31.297Z",
       "unread_count": 1
     },
     "… 3 more"
@@ -172,7 +172,7 @@ Response `200`:
       "mine": false,
       "kind": "text",
       "body": "Hi! Is the A20 still available? Does it come with the Bluetooth cable?",
-      "sent_at": "2026-10-21T08:40:12.714Z"
+      "sent_at": "2026-10-21T11:58:31.297Z"
     },
     {
       "id": "msg_2",
@@ -181,8 +181,8 @@ Response `200`:
       "mine": true,
       "kind": "text",
       "body": "Yes and yes — original case, cable and the spare ear seals.",
-      "sent_at": "2026-10-21T08:44:12.714Z",
-      "read_at": "2026-10-21T08:50:12.714Z"
+      "sent_at": "2026-10-21T12:02:31.297Z",
+      "read_at": "2026-10-21T12:08:31.297Z"
     },
     "… 2 more"
   ],
@@ -223,13 +223,13 @@ Response `201`:
   "success": true,
   "message": "Created successfully.",
   "data": {
-    "id": "msg_8yyizut",
+    "id": "msg_3bwefnk",
     "conversation_id": "cnv_1",
     "sender_id": "usr_10422",
     "mine": true,
     "kind": "text",
     "body": "Is the headset still available?",
-    "sent_at": "2026-10-21T09:50:13.084Z"
+    "sent_at": "2026-10-21T13:08:31.557Z"
   }
 }
 ```

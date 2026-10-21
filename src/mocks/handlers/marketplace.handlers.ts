@@ -201,25 +201,16 @@ on('DELETE', '/sellers/:username/follow', ({ params }) => {
 })
 
 /* ── Content ───────────────────────────────────────────────────── */
+/** CMS help articles served at /help/:slug (AD15). Guides and policies have their own designed pages (VC1–VC13). */
 const PAGES: Record<string, { title: string; html: string }> = {
-  about: {
-    title: 'About Pilotwardrobe',
-    html: '<p>Pilotwardrobe is the aviation-only marketplace for pilots, cabin crew, engineers and enthusiasts. We built it because good kit deserves a second flight — and because buying a $700 headset from a stranger should feel as safe as a pre-flight checklist.</p><h2>How we keep trades safe</h2><ul><li><strong>KYC-verified sellers.</strong> Every seller clears identity checks before their first listing goes live.</li><li><strong>Escrow on every order.</strong> Funds are held until you confirm your gear has landed.</li><li><strong>Aviator verification.</strong> Licence-holders can verify credentials for an Aviator badge.</li></ul><h2>Where we fly</h2><p>Nigeria, Ghana and the United Kingdom today, with the United States in beta.</p>',
+  'prohibited-items': {
+    title: 'Prohibited items',
+    html: '<p>To keep the marketplace safe and legal, these items can’t be listed, sold or swapped on Pilotwardrobe.</p><h2>Never allowed</h2><ul><li><strong>Counterfeit or replica gear</strong>, including copies of branded headsets, watches and uniforms.</li><li><strong>Airline IDs, crew badges, passes</strong> and any item that grants airside or flight-deck access.</li><li><strong>Security or restricted items</strong>, including export-controlled avionics without authorisation.</li><li><strong>Current chart subscriptions</strong> and other licences that can’t be transferred.</li><li><strong>Stolen or company-owned kit</strong> you don’t have the right to sell.</li><li><strong>Dangerous goods</strong>: oxygen cylinders, flares, life-vest CO₂ cartridges and loose lithium batteries.</li></ul><h2>What happens if you list one</h2><p>We remove the listing and notify you. Repeat or deliberate breaches can lead to suspension. If you spot a prohibited item, use Report on the listing.</p>',
   },
-  'how-it-works': {
-    title: 'How it works',
-    html: '<h2>Buying</h2><ol><li>Find gear from verified sellers and check it fits with your Fit Kit.</li><li>Pay securely — your money is held in escrow, not sent to the seller.</li><li>Track your order from wheels-up to landing.</li><li>Confirm it arrived as described and the seller gets paid. You have 72 hours to raise a problem.</li></ol><h2>Selling</h2><ol><li>Verify your identity once (about 3 minutes).</li><li>List an item with photos, condition and freight in under two minutes.</li><li>Ship within 3 days of payment. Funds release when the buyer confirms.</li></ol><h2>Swapping</h2><p>Offer one or more items from your hangar, plus a cash top-up if needed. Both sides ship; escrow releases when both confirm.</p>',
+  'buyer-protection': {
+    title: 'Buyer protection',
+    html: '<p>Every order on Pilotwardrobe is covered from checkout to landing.</p><ul><li><strong>Escrow on every order.</strong> Your payment is held, not sent to the seller, until you confirm the item landed or 72 hours pass after delivery.</li><li><strong>Automatic refunds.</strong> If the seller doesn’t add tracking within 5 days, you’re refunded automatically.</li><li><strong>Fair disputes.</strong> If the item isn’t as described, open a dispute within 72 hours. A mediator decides within 5 business days if you can’t agree.</li></ul><p>Trades paid outside Pilotwardrobe aren’t covered.</p>',
   },
-  faq: {
-    title: 'Frequently asked questions',
-    html: '<h3>Is my payment safe?</h3><p>Yes. Every payment is held in escrow until you confirm the item landed as described, or 72 hours pass after delivery.</p><h3>Which payment methods are supported?</h3><p>Cards, bank transfer and wallets via Paystack, Flutterwave, Monnify, Stripe and PayPal depending on your country and currency.</p><h3>What if my item is not as described?</h3><p>Open a dispute from the order within 72 hours of landing. Escrow freezes while a mediator reviews.</p><h3>Do I need to verify my identity?</h3><p>Only to sell, swap, or withdraw more than $500.</p>',
-  },
-  terms: { title: 'Terms of service', html: '<p>These terms govern your use of Pilotwardrobe. By creating an account you agree to trade honestly, describe items accurately, keep payments on-platform and follow applicable export-control law for avionics.</p><h2>1. Escrow</h2><p>Funds are released to sellers when buyers confirm delivery or after the dispute window closes.</p><h2>2. Fees</h2><p>Sellers pay a commission on completed sales. Buyers pay a buyer-protection fee at checkout.</p><h2>3. Prohibited items</h2><p>Counterfeit goods, stolen equipment, restricted or export-controlled items without authorisation.</p>' },
-  privacy: { title: 'Privacy policy', html: '<p>We collect the minimum data needed to run a safe marketplace: account details, identity verification results, transaction records and messages relating to trades.</p><h2>Identity documents</h2><p>Documents are encrypted and deleted 90 days after approval.</p><h2>Payments</h2><p>Card details are handled by our payment partners and never stored by Pilotwardrobe.</p>' },
-  cookies: { title: 'Cookie policy', html: '<p>We use essential cookies for sign-in and security, and optional analytics cookies only with your consent.</p>' },
-  'returns-refunds': { title: 'Returns & refunds', html: '<p>Raise a problem within 72 hours of delivery. Approved refunds return to your original payment method.</p>' },
-  'seller-fees': { title: 'Seller fees', html: '<p>Standard commission is 8% on completed sales (6% for avionics, capped at $120). Swap fee is 4% each side.</p>' },
-  'freight-guide': { title: 'Freight guide', html: '<p>Use Pilotwardrobe Freight for prepaid, tracked labels insured to $1,000, ship it yourself with tracking, or hand off at a listed airfield.</p>' },
 }
 
 on('GET', '/pages/:slug', ({ params }) => {
@@ -228,14 +219,53 @@ on('GET', '/pages/:slug', ({ params }) => {
   return ok({ slug: params.slug, title: page.title, html: page.html, updatedAt: '2026-07-01T00:00:00Z' })
 })
 
+const CONTACT_TOPICS = ['order', 'escrow', 'dispute', 'selling', 'account', 'trust_safety', 'callback', 'other']
+
 on('POST', '/contact', ({ body }) => {
   const errors: Record<string, string> = {}
   if (!str(body.name)) errors.name = 'Please tell us your name.'
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(str(body.email))) errors.email = 'Enter a valid email address.'
+  if (!CONTACT_TOPICS.includes(str(body.topic))) errors.topic = 'Choose a topic.'
+  if (!str(body.subject).trim()) errors.subject = 'Add a short subject.'
   if (str(body.message).length < 10) errors.message = 'Please add a little more detail (10+ characters).'
+  if (body.topic === 'callback' && !/^\+?[\d\s()-]{7,}$/.test(str(body.phone))) errors.phone = 'Enter a phone number we can call.'
+  if (Array.isArray(body.attachmentIds) && body.attachmentIds.length > 5) errors.attachment_ids = 'Attach up to 5 files.'
   if (Object.keys(errors).length) throw validation(errors)
-  return created({ ticket: `SUP-${Math.floor(Math.random() * 90000 + 10000)}` }, 'Thanks — our crew will reply within 4 hours.')
+  const reply = body.topic === 'trust_safety' ? 'Our Trust & Safety team is on it.' : body.topic === 'callback' ? 'We’ll call you back within 2 hours.' : 'We’ll reply within 24 hours.'
+  return created({ ticket: `SUP-${Math.floor(Math.random() * 90000 + 10000)}` }, `Message received. ${reply}`)
 })
+
+on('GET', '/help/summary', () =>
+  ok({
+    popular: [
+      { faqId: 'confirm-landed', question: 'How long do I have to confirm goods landed?', tag: 'Escrow', views: 4100 },
+      { faqId: 'payout-pending', question: 'Why is my payout still pending?', tag: 'Wallet', views: 3300 },
+      { faqId: 'verify-licence', question: 'How do I verify my pilot licence?', tag: 'Verification', views: 3000 },
+      { faqId: 'swap-cancel-accepted', question: 'Can I cancel an offer after it’s accepted?', tag: 'Offers', views: 2100 },
+      { faqId: 'holding-pattern', question: 'What does “Holding pattern” mean?', tag: 'Freight', views: 1800 },
+    ],
+    status: {
+      overall: 'operational',
+      windowDays: 30,
+      uptimePercent: 99.97,
+      components: ['Payments', 'Messaging', 'Verification', 'Tracking'].map((name) => ({
+        name,
+        days: Array.from({ length: 30 }, (_, i) => (name === 'Tracking' && i === 21 ? 'degraded' : 'up')),
+      })),
+    },
+  }),
+)
+
+on('GET', '/support/contact-info', () =>
+  ok({
+    chatLoad: [3, 2, 1, 1, 1, 1, 4, 13, 26, 34, 31, 26, 23, 24, 28, 30, 28, 22, 20, 15, 12, 8, 5, 3],
+    avgChatReplyMinutes: 4,
+    offices: [
+      { name: 'Lagos · HQ', address: '14 Kofo Abayomi St, Victoria Island' },
+      { name: 'London', address: 'Hangar 3, Biggin Hill Airport, TN16 3BH' },
+    ],
+  }),
+)
 
 on('POST', '/newsletter', ({ body }) => {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(str(body.email))) throw validation({ email: 'Enter a valid email address.' })

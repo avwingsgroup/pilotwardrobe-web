@@ -83,9 +83,10 @@ src/
   types/          Domain models (camelCase), API envelope and error types, permission catalogue
   stores/         Pinia: auth, ui (toasts/modals/offline), cart, notification, marketplace
   router/         Routes, meta typing, pure access resolver (`access.ts`), guards
-  layouts/        Public, Account (My Hangar), Checkout, Auth, Admin
-  views/          public/ auth/ account/ checkout/ admin/ errors/
-  components/     common/ forms/ navigation/ marketplace/ products/ auth/ dashboard/ payments/ transactions/ admin/
+  layouts/        Public, Info (guides/policies/support), Account (My Hangar), Checkout, Auth, Admin
+  views/          public/ info/ auth/ account/ checkout/ admin/ errors/
+  content/info/   Copy for the information centre: sub-nav, FAQs, platform timings (PLATFORM)
+  components/     common/ forms/ navigation/ marketplace/ products/ info/ auth/ dashboard/ payments/ transactions/ admin/
   composables/    useResource, useForm, useSeo, useGatedAction, useListingQuery, useAdminTable, useFocusTrap, …
   directives/     v-can
   utils/          money, dates, validators, security (safe redirects, sanitising), analytics, permissions

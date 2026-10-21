@@ -562,8 +562,8 @@ Response `201`:
       "pay",
       "cancel"
     ],
-    "placed_at": "2026-10-21T09:50:13.072Z",
-    "updated_at": "2026-10-21T09:50:13.072Z"
+    "placed_at": "2026-10-21T13:08:31.548Z",
+    "updated_at": "2026-10-21T13:08:31.548Z"
   }
 }
 ```
@@ -729,8 +729,8 @@ Response `200`:
       "progress": 0.62
     },
     "estimated_delivery": {
-      "from": "2026-10-22T09:50:12.668Z",
-      "to": "2026-10-24T09:50:12.668Z"
+      "from": "2026-10-22T13:08:31.273Z",
+      "to": "2026-10-24T13:08:31.273Z"
     },
     "tracking": [
       {
@@ -738,7 +738,7 @@ Response `200`:
         "code": "payment_secured",
         "label": "Payment secured in escrow",
         "detail": "$193.40",
-        "occurred_at": "2026-10-18T09:50:12.667Z",
+        "occurred_at": "2026-10-18T13:08:31.273Z",
         "state": "done"
       },
       {
@@ -746,7 +746,7 @@ Response `200`:
         "code": "dispatched",
         "label": "Seller dispatched · wheels up",
         "detail": "Lagos hub",
-        "occurred_at": "2026-10-19T09:50:12.667Z",
+        "occurred_at": "2026-10-19T13:08:31.273Z",
         "state": "done"
       },
       "… 3 more"
@@ -761,8 +761,8 @@ Response `200`:
       "message",
       "open_dispute"
     ],
-    "placed_at": "2026-10-18T09:50:12.668Z",
-    "updated_at": "2026-10-20T13:50:12.668Z"
+    "placed_at": "2026-10-18T13:08:31.273Z",
+    "updated_at": "2026-10-20T17:08:31.273Z"
   }
 }
 ```
