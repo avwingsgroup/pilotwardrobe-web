@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0d2a57" />
+    <meta name="color-scheme" content="light" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <title>Pilotwardrobe — Buy, sell or swap premium aviation gear</title>
+    <meta
+      name="description"
+      content="Buy, sell or swap premium aviation gear with KYC-verified pilots, crew and engineers. Every payment held in escrow until your gear lands."
+    />
+    <meta property="og:site_name" content="Pilotwardrobe" />
+    <!-- API + media origins: warm up connections early (adjust to production hosts). -->
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+  </head>
+  <body>
+    <noscript>
+      <p style="padding: 24px; font-family: system-ui">
+        Pilotwardrobe needs JavaScript enabled to buy, sell and swap aviation gear.
+      </p>
+    </noscript>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

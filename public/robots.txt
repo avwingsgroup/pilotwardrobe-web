@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /hangar
+Disallow: /checkout
+Disallow: /messages
+Disallow: /notifications
+Disallow: /admin
+Disallow: /auth
+Disallow: /payment
+Allow: /
