@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest'
 import { nextTick } from 'vue'
 import { useForm } from '@/composables/useForm'
 import { required } from '@/utils/validators'
-import { hasConsent, readConsent, saveConsent } from '@/utils/cookieConsent'
+import { CONSENT_VERSION, hasConsent, hasDecided, readConsent, saveConsent } from '@/utils/cookieConsent'
+import { registerAnalyticsSink, track } from '@/utils/analytics'
 import { ApiError } from '@/api/errors'
 
 describe('useForm', () => {
@@ -47,6 +48,23 @@ describe('cookie consent', () => {
     expect(hasConsent('analytics')).toBe(true)
     expect(readConsent().updatedAt).not.toBeNull()
     expect(announced).toMatchObject({ analytics: true, marketing: false })
+  })
+
+  it('treats a choice from an older policy version as undecided', () => {
+    localStorage.setItem('pw.cookie-consent', JSON.stringify({ functional: true, analytics: true, marketing: true, updatedAt: '2025-01-01T00:00:00Z', version: CONSENT_VERSION - 1 }))
+    expect(hasDecided()).toBe(false)
+    expect(hasConsent('analytics')).toBe(false)
+  })
+
+  it('only sends analytics events after analytics consent', () => {
+    const seen: string[] = []
+    const off = registerAnalyticsSink((name) => seen.push(name))
+    track('favorite_added', { listingId: 'lst_1' })
+    expect(seen).toEqual([])
+    saveConsent({ functional: false, analytics: true, marketing: false })
+    track('favorite_added', { listingId: 'lst_1' })
+    expect(seen).toEqual(['favorite_added'])
+    off()
   })
 
   it('ignores corrupted storage', () => {

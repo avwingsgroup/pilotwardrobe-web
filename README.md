@@ -127,6 +127,20 @@ tests/
 3. Token mode (cross-site deployment): set `VITE_AUTH_MODE=token`. Login must return `access_token`.
 4. Implement the endpoints in `docs/backend-api-contract.md`. `docs/frontend-backend-handoff.md` §13 has the go-live checklist.
 
+### Local Laravel (Laragon, Valet, Herd)
+
+Sanctum's session and `XSRF-TOKEN` cookies are host-only and `SameSite=Lax`, so a SPA on `localhost` can't use them against `https://pilotwardrobe-api.test` directly. Proxy the API through the Vite dev server so the cookies are first-party. Put this in `.env.development.local`:
+
+```env
+DEV_API_PROXY=https://pilotwardrobe-api.test   # not VITE_-prefixed: dev server only, never shipped
+VITE_API_MODE=live
+VITE_AUTH_MODE=cookie
+VITE_API_BASE_URL=/api/v1
+VITE_SANCTUM_CSRF_URL=/sanctum/csrf-cookie
+```
+
+Then run `npm run dev`. Laravel's `SANCTUM_STATEFUL_DOMAINS` must include the dev origin (`localhost:5173`). If you set these variables inline from Git Bash instead, prefix the command with `MSYS_NO_PATHCONV=1`; otherwise Git Bash rewrites `/api/v1` into a Windows path.
+
 ## Deployment
 
 `npm run build` writes static files to `dist/`. Serve them from any static host or CDN with:

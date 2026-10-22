@@ -4,6 +4,13 @@ import { expect, test } from '@playwright/test'
  * Information centre (VC1–VC13): navigation, search/filter, deep links,
  * consent persistence and the contact form. Runs in mock API mode.
  */
+// These flows aren't about consent: start with a choice made so the banner stays out of the way.
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => {
+    if (!localStorage.getItem('pw.cookie-consent')) localStorage.setItem('pw.cookie-consent', JSON.stringify({ functional: false, analytics: false, marketing: false, updatedAt: '2026-10-01T00:00:00Z', version: 1 }))
+  })
+})
+
 const PAGES: [string, RegExp][] = [
   ['/how-to-swap', /Trade gear pilot to pilot/],
   ['/how-to-sell', /Turn idle kit into cash/],

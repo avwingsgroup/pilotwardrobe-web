@@ -2,6 +2,9 @@
 import { Globe, Lock } from '@lucide/vue'
 import BrandLogo from '@/components/navigation/BrandLogo.vue'
 import { INFO_GROUPS, INFO_MARKETPLACE_LINKS } from '@/content/info/nav'
+import { useCookieConsent } from '@/composables/useCookieConsent'
+
+const consent = useCookieConsent()
 </script>
 
 <template>
@@ -28,6 +31,7 @@ import { INFO_GROUPS, INFO_MARKETPLACE_LINKS } from '@/content/info/nav'
       <div class="pw-ifoot__bottom">
         <p>© {{ new Date().getFullYear() }} Pilotwardrobe Ltd. All rights reserved.</p>
         <p class="pw-ifoot__meta">
+          <button type="button" class="pw-ifoot__cookie" @click="consent.openPreferences">Cookie settings</button>
           <span><Lock :size="14" aria-hidden="true" /> Payments held in escrow</span>
           <span><Globe :size="14" aria-hidden="true" /> English · USD</span>
         </p>
@@ -96,6 +100,16 @@ import { INFO_GROUPS, INFO_MARKETPLACE_LINKS } from '@/content/info/nav'
   display: flex;
   flex-wrap: wrap;
   gap: var(--pw-space-5);
+}
+
+.pw-ifoot__cookie {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .pw-ifoot__meta span {

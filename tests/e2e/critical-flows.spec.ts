@@ -4,6 +4,13 @@ import { expect, test, type Page } from '@playwright/test'
  * Critical-path E2E against the dev server in mock API mode.
  * Run: npx playwright install chromium && npm run test:e2e
  */
+// These flows aren't about consent: start with a choice made so the banner stays out of the way.
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => {
+    if (!localStorage.getItem('pw.cookie-consent')) localStorage.setItem('pw.cookie-consent', JSON.stringify({ functional: false, analytics: false, marketing: false, updatedAt: '2026-10-01T00:00:00Z', version: 1 }))
+  })
+})
+
 /** Asserts we're on the login page with `next` pointing at `path` (however the router encodes it). */
 async function expectLoginWithNext(page: Page, path: string) {
   await expect(page).toHaveURL((url) => url.pathname === '/auth/login' && (url.searchParams.get('next') ?? '').startsWith(path))
