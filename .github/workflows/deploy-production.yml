@@ -1,4 +1,4 @@
-name: Deploy Pilotwardrobe Web App to Production
+name: Deploy Pilotwardrobe Web-App to Production
 
 on:
   push:
