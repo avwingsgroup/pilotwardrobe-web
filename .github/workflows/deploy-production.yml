@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+    # Documentation-only changes don't change the bundle.
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+      - '.vscode/**'
 
   workflow_dispatch:
 
@@ -14,32 +19,146 @@ concurrency:
   group: vue-production-deployment
   cancel-in-progress: false
 
+env:
+  NODE_VERSION: '22'
+  # Build configuration comes from the committed .env.production (public values only).
+
 jobs:
-  deploy:
-    name: Build and Deploy
+  # ── Quality gate (runs in parallel with e2e and build) ─────────────────
+  verify:
+    name: Lint, type-check, unit tests
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type-check
+        run: npm run type-check
+
+      - name: Unit, component and contract tests
+        run: npm test
+
+  e2e:
+    name: End-to-end tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Resolve Playwright version
+        id: playwright
+        run: echo "version=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright.outputs.version }}
+
+      - name: Install Chromium
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+
+      - name: Install Chromium system dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+
+      # Runs against the dev server in mock API mode (playwright.config.ts).
+      - name: Run Playwright
+        run: npm run test:e2e
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+
+  build:
+    name: Build production bundle
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      # Type-checking already runs in `verify`; build the bundle only.
+      - name: Build Vue application
+        run: npm run build:only
+
+      - name: Verify bundle
+        run: |
+          set -euo pipefail
+          test -f dist/index.html
+          # Live builds must not contain the mock API, demo accounts or mock imagery.
+          if grep -rlE 'pilot@example\.com|/__mock/|media/mock' dist/assets; then
+            echo "::error::Mock-mode code found in the production bundle. Is VITE_API_MODE=live in .env.production?"
+            exit 1
+          fi
+          test ! -d dist/media/mock
+          echo "### Bundle" >> "$GITHUB_STEP_SUMMARY"
+          echo "Total size: $(du -sh dist | cut -f1)" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload bundle
+        uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist/
+          retention-days: 7
+          if-no-files-found: error
+
+  # ── Deploy (only after every check passes) ─────────────────────────────
+  deploy:
+    name: Deploy
+    needs: [verify, e2e, build]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     environment:
       name: production
       url: https://pilotwardrobe.com
 
+    env:
+      DEPLOY_PATH: /var/www/my-vue-app
+      SITE_URL: https://pilotwardrobe.com
+      KEEP_RELEASES: 5
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
+      - name: Download bundle
+        uses: actions/download-artifact@v7
         with:
-          node-version: '22'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build Vue application
-        env:
-          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
-        run: npm run build
+          name: dist
+          path: dist
 
       - name: Configure SSH
         env:
@@ -88,65 +207,85 @@ jobs:
           ssh-keygen -l -f ~/.ssh/known_hosts > /dev/null
           chmod 644 ~/.ssh/known_hosts
 
-          cat > ~/.ssh/config <<'SSH_CONFIG'
-          Host *
+          # One multiplexed connection is reused by every ssh/rsync call below.
+          cat > ~/.ssh/config <<SSH_CONFIG
+          Host vps
+            HostName ${VPS_HOST}
+            User ${VPS_USER}
+            Port ${VPS_PORT}
             BatchMode yes
             StrictHostKeyChecking yes
             IdentitiesOnly yes
             IdentityFile ~/.ssh/id_ed25519
             UserKnownHostsFile ~/.ssh/known_hosts
             ConnectTimeout 15
+            ServerAliveInterval 15
+            ControlMaster auto
+            ControlPath ~/.ssh/cm-%C
+            ControlPersist 5m
           SSH_CONFIG
+          chmod 600 ~/.ssh/config
 
       - name: Verify SSH connection
-        env:
-          VPS_HOST: ${{ secrets.VPS_HOST }}
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_PORT: ${{ secrets.VPS_PORT }}
-        run: ssh -p "${VPS_PORT:-22}" "${VPS_USER}@${VPS_HOST}" true
+        run: ssh vps true
 
-      - name: Deploy application
-        env:
-          VPS_HOST: ${{ secrets.VPS_HOST }}
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_PORT: ${{ secrets.VPS_PORT }}
-          DEPLOY_PATH: /var/www/my-vue-app
+      - name: Upload release
+        id: upload
         run: |
-          VPS_PORT="${VPS_PORT:-22}"
-          RELEASE="${GITHUB_SHA}"
-          RELEASE_PATH="${DEPLOY_PATH}/releases/${RELEASE}"
+          set -euo pipefail
+          RELEASE_PATH="${DEPLOY_PATH}/releases/${GITHUB_SHA}"
+          echo "release_path=${RELEASE_PATH}" >> "$GITHUB_OUTPUT"
+          ssh vps "mkdir -p '${RELEASE_PATH}'"
+          # --link-dest hard-links files unchanged since the live release (content-hashed
+          # assets), so only new or changed files cross the wire.
+          rsync -rlz --checksum --delete \
+            --chmod=D755,F644 \
+            --link-dest="${DEPLOY_PATH}/current/" \
+            -e ssh \
+            dist/ "vps:${RELEASE_PATH}/"
 
-          echo "Deploying release: ${RELEASE}"
+      - name: Activate release
+        id: activate
+        env:
+          RELEASE_PATH: ${{ steps.upload.outputs.release_path }}
+        run: |
+          set -euo pipefail
+          # Remember the live release for rollback, then swap the symlink atomically
+          # (rename over the old link; there is never a moment without `current`).
+          PREVIOUS="$(ssh vps "readlink -f '${DEPLOY_PATH}/current' 2>/dev/null || true")"
+          echo "previous=${PREVIOUS}" >> "$GITHUB_OUTPUT"
+          ssh vps "ln -sfn '${RELEASE_PATH}' '${DEPLOY_PATH}/current.next' && mv -Tf '${DEPLOY_PATH}/current.next' '${DEPLOY_PATH}/current'"
+          echo "Activated ${GITHUB_SHA} (previous: ${PREVIOUS:-none})"
 
-          ssh \
-            -p "${VPS_PORT}" \
-            "${VPS_USER}@${VPS_HOST}" \
-            "mkdir -p '${RELEASE_PATH}'"
+      - name: Smoke test
+        run: |
+          set -euo pipefail
+          # The live index.html must reference this build's entry script.
+          ENTRY="$(grep -oE '/assets/index-[A-Za-z0-9_-]+\.js' dist/index.html | head -1)"
+          : "${ENTRY:?Could not find the entry script in dist/index.html}"
+          curl -fsS --retry 5 --retry-delay 3 --retry-all-errors -H 'Cache-Control: no-cache' "${SITE_URL}/" -o live-index.html
+          grep -qF "${ENTRY}" live-index.html || { echo "::error::${SITE_URL} is not serving ${ENTRY}"; exit 1; }
+          curl -fsS -o /dev/null --retry 3 --retry-all-errors "${SITE_URL}${ENTRY}"
+          # SPA fallback: deep links must serve index.html, not 404.
+          curl -fsS -o /dev/null --retry 3 --retry-all-errors "${SITE_URL}/terms"
+          echo "Smoke test passed: ${SITE_URL} serves ${ENTRY}"
 
-          rsync \
-            -az \
-            --delete \
-            -e "ssh -p ${VPS_PORT}" \
-            dist/ \
-            "${VPS_USER}@${VPS_HOST}:${RELEASE_PATH}/"
-
-          ssh \
-            -p "${VPS_PORT}" \
-            "${VPS_USER}@${VPS_HOST}" \
-            "ln -sfn '${RELEASE_PATH}' '${DEPLOY_PATH}/current'"
-
-          echo "Deployment completed successfully."
+      - name: Roll back on failure
+        if: failure() && steps.activate.outputs.previous != ''
+        env:
+          PREVIOUS: ${{ steps.activate.outputs.previous }}
+        run: |
+          ssh vps "ln -sfn '${PREVIOUS}' '${DEPLOY_PATH}/current.next' && mv -Tf '${DEPLOY_PATH}/current.next' '${DEPLOY_PATH}/current'"
+          echo "::warning::Rolled back to ${PREVIOUS}"
 
       - name: Remove old releases
-        env:
-          VPS_HOST: ${{ secrets.VPS_HOST }}
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_PORT: ${{ secrets.VPS_PORT }}
-          DEPLOY_PATH: /var/www/my-vue-app
+        if: success()
         run: |
-          VPS_PORT="${VPS_PORT:-22}"
-          ssh \
-            -p "${VPS_PORT}" \
-            "${VPS_USER}@${VPS_HOST}" \
-            "cd '${DEPLOY_PATH}/releases' && \
-             ls -1dt */ 2>/dev/null | tail -n +6 | xargs -r rm -rf"
+          set -euo pipefail
+          # Keep the live release plus the newest others; never delete what `current` points to.
+          ssh vps "cd '${DEPLOY_PATH}/releases' && LIVE=\"\$(basename \"\$(readlink -f '${DEPLOY_PATH}/current')\")\" && \
+            ls -1t | grep -vxF \"\$LIVE\" | tail -n +${KEEP_RELEASES} | xargs -r -I{} rm -rf -- '{}'"
+
+      - name: Close SSH connection
+        if: always()
+        run: ssh -O exit vps 2>/dev/null || true

@@ -150,6 +150,13 @@ Then run `npm run dev`. Laravel's `SANCTUM_STATEFUL_DOMAINS` must include the de
 - **Security headers:** a CSP allowing `self`, `res.cloudinary.com` and the API origin for `connect-src`, and the gateway hosts for `form-action`/`frame-src` if a popup SDK is used. Also `Strict-Transport-Security`, `X-Content-Type-Options: nosniff` and `Referrer-Policy: strict-origin-when-cross-origin`.
 - **Link previews:** the app is client-rendered. Share previews need server-side OG tags; see handoff §11.
 
+### Production pipeline
+
+`.github/workflows/deploy-production.yml` runs on pushes to `main` that change more than documentation, and on manual dispatch:
+
+1. **verify** (lint, type-check, unit tests), **e2e** (Playwright, Chromium) and **build** run in parallel. The build uses the committed `.env.production` and fails if any mock-mode code reaches the bundle.
+2. **deploy** runs only when all three pass. It uploads the bundle to `releases/<sha>` over a single multiplexed SSH connection, hard-linking unchanged files from the live release (`rsync --link-dest`), switches `current` atomically, and smoke-tests the site (new entry script served, `/terms` deep link works). If the smoke test fails, it restores the previous release and the run fails. Five releases are kept; the live one is never removed.
+
 ### Production SSH setup
 
 The deployment workflow reads `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`, and `VPS_KNOWN_HOSTS` from GitHub secrets available to the `production` environment. `VPS_PORT` defaults to `22`. Set `VPS_HOST` to the hostname or IP only, without `https://`, a username, or a port.
