@@ -149,7 +149,7 @@ jobs:
       url: https://pilotwardrobe.com
 
     env:
-      DEPLOY_PATH: /var/www/my-vue-app
+      DEPLOY_PATH: /var/www/apps/pilotwardrobe/frontend
       SITE_URL: https://pilotwardrobe.com
       KEEP_RELEASES: 5
 
