@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, watch } from 'vue'
 import { Settings2 } from '@lucide/vue'
 import AppButton from '@/components/common/AppButton.vue'
 import AppToggle from '@/components/forms/AppToggle.vue'
@@ -9,7 +9,8 @@ import PolicyAccordion from '@/components/info/PolicyAccordion.vue'
 import { useSeo } from '@/composables/useSeo'
 import { useUiStore } from '@/stores/ui.store'
 import { PLATFORM } from '@/content/info/nav'
-import { readConsent, saveConsent, type ConsentCategory } from '@/utils/cookieConsent'
+import { useCookieConsent } from '@/composables/useCookieConsent'
+import type { ConsentCategory } from '@/utils/cookieConsent'
 
 useSeo({ title: 'Cookie policy', description: 'The cookies Pilotwardrobe uses and how to change your preferences.', canonicalPath: '/cookies' })
 const ui = useUiStore()
@@ -23,13 +24,20 @@ const sections = [
   { id: 'contact', title: 'Contact' },
 ]
 
-const saved = readConsent()
-const prefs = reactive<Record<ConsentCategory, boolean>>({ functional: saved.functional, analytics: saved.analytics, marketing: saved.marketing })
+// Draft of the shared consent (banner / dialog / this page stay in sync).
+const consent = useCookieConsent()
+const prefs = reactive<Record<ConsentCategory, boolean>>({ functional: false, analytics: false, marketing: false })
+watch(
+  () => [consent.state.functional, consent.state.analytics, consent.state.marketing, consent.state.updatedAt],
+  () => Object.assign(prefs, { functional: consent.state.functional, analytics: consent.state.analytics, marketing: consent.state.marketing }),
+  { immediate: true },
+)
 
 const TYPE_TONE = { Necessary: '', Functional: 'success', Analytics: 'warning', Marketing: 'neutral' } as const
 const cookies: { name: string; by: string; purpose: string; expires: string; type: keyof typeof TYPE_TONE }[] = [
-  { name: 'pw_session', by: 'Pilotwardrobe', purpose: 'Keeps you signed in', expires: 'Session', type: 'Necessary' },
-  { name: 'XSRF-TOKEN', by: 'Pilotwardrobe', purpose: 'Protects forms against forgery', expires: 'Session', type: 'Necessary' },
+  { name: 'pilotwardrobe-session', by: 'Pilotwardrobe', purpose: 'Keeps you signed in', expires: '2 hours', type: 'Necessary' },
+  { name: 'XSRF-TOKEN', by: 'Pilotwardrobe', purpose: 'Protects forms against forgery', expires: '2 hours', type: 'Necessary' },
+  { name: 'pw.cookie-consent', by: 'Pilotwardrobe', purpose: 'Remembers your cookie choice (stored on your device)', expires: 'Until changed', type: 'Necessary' },
   { name: '__stripe_mid', by: 'Payment provider', purpose: 'Fraud prevention at checkout', expires: '1 year', type: 'Necessary' },
   { name: 'pw_currency', by: 'Pilotwardrobe', purpose: 'Remembers your display currency', expires: '6 months', type: 'Functional' },
   { name: 'pw_fitkit', by: 'Pilotwardrobe', purpose: 'Caches your saved sizes', expires: '6 months', type: 'Functional' },
@@ -46,15 +54,13 @@ const categories: { key: ConsentCategory | 'necessary'; title: string; count: nu
 ]
 
 function persist(message: string) {
-  saveConsent({ ...prefs })
+  consent.save({ ...prefs })
   ui.success(message, 'Changes apply right away on this device.')
 }
 
 function rejectOptional() {
-  prefs.functional = false
-  prefs.analytics = false
-  prefs.marketing = false
-  persist('Optional cookies switched off')
+  consent.rejectAll()
+  ui.success('Optional cookies switched off', 'Changes apply right away on this device.')
 }
 
 const collapsed = [

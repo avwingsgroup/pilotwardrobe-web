@@ -1,4 +1,5 @@
 import type { PaymentGateway } from '@/types/payment'
+import { hasConsent } from './cookieConsent'
 
 /**
  * Typed, vendor-neutral analytics events. Business components call `track()`;
@@ -39,7 +40,9 @@ export function registerAnalyticsSink(sink: AnalyticsSink) {
   }
 }
 
+/** Events are only dispatched once the visitor has allowed analytics cookies (VC14/VC15). */
 export function track<K extends AnalyticsEventName>(name: K, properties: AnalyticsEvents[K]) {
+  if (!hasConsent('analytics')) return
   for (const sink of sinks) {
     try {
       sink(name, properties)

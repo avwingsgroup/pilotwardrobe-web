@@ -3,6 +3,9 @@ import PaymentBrandMark, { type PaymentBrand } from '@/components/payments/Payme
 import { ShieldCheck } from '@lucide/vue'
 import BrandLogo from './BrandLogo.vue'
 import NewsletterForm from './NewsletterForm.vue'
+import { useCookieConsent } from '@/composables/useCookieConsent'
+
+const consent = useCookieConsent()
 
 const columns = [
   {
@@ -107,7 +110,10 @@ const payments: { brand: PaymentBrand; label: string }[] = [
     <div class="pw-footer__bottom">
       <div class="pw-container pw-footer__bottom-row">
         <p>© {{ new Date().getFullYear() }} Pilotwardrobe Ltd. All rights reserved.</p>
-        <p>USD · English</p>
+        <p class="pw-footer__legal">
+          <button type="button" class="pw-footer__cookie" @click="consent.openPreferences">Cookie settings</button>
+          <span>USD · English</span>
+        </p>
       </div>
     </div>
   </footer>
@@ -216,6 +222,23 @@ const payments: { brand: PaymentBrand; label: string }[] = [
 
 .pw-footer__bottom {
   border-top: 1px solid rgb(255 255 255 / 10%);
+}
+
+.pw-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pw-space-5);
+}
+
+.pw-footer__cookie {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .pw-footer__bottom-row {

@@ -52,6 +52,9 @@ const gatewayError = ref<string | null>(null)
 const methodsLoading = ref(true)
 const placing = ref(false)
 const mounted = ref(false)
+// Quote and saved addresses load in parallel; stepping on before both land would
+// report "Choose a destination" even though a default address is about to be selected.
+const ready = ref(false)
 
 const input = computed(() => ({
   listingId: typeof route.query.listing === 'string' ? route.query.listing : undefined,
@@ -82,6 +85,7 @@ onMounted(async () => {
   addresses.value = addr
   addressId.value = addr.find((a) => a.isDefault)?.id ?? addr[0]?.id ?? ''
   if (!physical.value) step.value = 2
+  ready.value = true
   try {
     methods.value = await paymentService.methods({ currency: currency.value, country: auth.user?.countryCode ?? 'NG' })
     gateway.value = methods.value.find((m) => m.enabled)?.code ?? null
@@ -219,7 +223,7 @@ async function placeOrder() {
       <div class="pw-co__nav">
         <button v-if="step > (physical ? 0 : 2)" type="button" class="pw-link-btn" @click="back">← Back to {{ STEPS[step - 1]?.toLowerCase() }}</button>
         <span v-else />
-        <AppButton v-if="step < 3" size="lg" :disabled="!quote" :loading="step === 2 && methodsLoading" @click="next">Continue to {{ STEPS[step + 1]?.toLowerCase() }}</AppButton>
+        <AppButton v-if="step < 3" size="lg" :disabled="!quote" :loading="!ready || (step === 2 && methodsLoading)" @click="next">Continue to {{ STEPS[step + 1]?.toLowerCase() }}</AppButton>
         <AppButton v-else size="lg" :loading="placing" @click="placeOrder"><template #icon><Lock :size="16" /></template>Pay {{ quote ? formatMoney(quote.totals.total) : '' }}</AppButton>
       </div>
     </div>

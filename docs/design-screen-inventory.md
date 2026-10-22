@@ -1,6 +1,6 @@
 # Design screen inventory
 
-Source: `docs/pilotwardrobe-designs` (75 frames). Every supplied frame is listed with its route, the role that can reach it, the API it depends on and its implementation status.
+Source: `docs/pilotwardrobe-designs` (77 frames). Every supplied frame is listed with its route, the role that can reach it, the API it depends on and its implementation status.
 
 **Mobile designs:** the coverage audit (VB0) references mobile frames (A0–A8, K1–K7, B1–B12, S1–S9, C1–C5, T1–T6, M1–M5, W1–W5, F1–F4). These were **not supplied**. Mobile layouts were derived from the desktop frames and from the app mock-ups in V1 (bottom tab bar, search under the header, chip filters). See *Design gaps* at the end.
 
@@ -48,6 +48,8 @@ All thirteen are `meta.info` routes in `PublicLayout`, which swaps in a Guides �
 | VC11 | Contact us | `/contact` | visitor+ (order picker when signed in) | `GET /support/contact-info`, `POST /contact`, `POST /media` | 🟡 live chat routed to the message form (see deviations) |
 | VC12 | FAQs | `/faq` (`?topic=`, `?q=`, `#question-id`) | visitor+ | — | ✅ |
 | VC13 | About us | `/about` | visitor+ | — | ✅ |
+| VC14 | Cookie banner | every page until a choice is made (`CookieBanner` in `App.vue`) | all | — (choice stored on the device, versioned) | ✅ |
+| VC15 | Cookie preferences dialog | from the banner, footer “Cookie settings” and `/cookies` | all | — | 🟡 optional categories start off (see deviations) |
 
 ## Authentication (web-auth)
 
@@ -139,6 +141,7 @@ All thirteen are `meta.info` routes in `PublicLayout`, which swaps in a Guides �
 7. **Policy “Download PDF”.** Opens the print dialog (“Save as PDF”) with a print stylesheet that strips site chrome; no pre-rendered PDFs exist. Point it at a backend URL if legal wants signed, versioned PDFs.
 8. **VC10 article counts.** The frame’s “24 articles” style counts imply a knowledge base that doesn’t exist; cards show the real number of FAQ answers per topic, or link to the relevant policy/page.
 9. **VC12 default tab.** The frame shows “Escrow & payments” selected; the page opens on “All” unless `?topic=` is set.
+10. **VC15 defaults.** The frame shows “Preferences” switched on. Every optional category starts off until the visitor opts in (pre-ticked boxes aren’t valid consent under GDPR/NDPR), and analytics events are only sent after analytics consent. Bump `CONSENT_VERSION` in `src/utils/cookieConsent.ts` when the cookie policy changes to ask everyone again.
 
 ## Design gaps (please supply)
 
