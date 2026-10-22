@@ -42,15 +42,68 @@ jobs:
         run: npm run build
 
       - name: Configure SSH
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
         run: |
+          set -euo pipefail
+          : "${VPS_HOST:?Set VPS_HOST in the production environment secrets}"
+          : "${VPS_USER:?Set VPS_USER in the production environment secrets}"
+          : "${VPS_SSH_KEY:?Set VPS_SSH_KEY in the production environment secrets}"
+          : "${VPS_KNOWN_HOSTS:?Set VPS_KNOWN_HOSTS to verified ssh-keyscan output in the production environment secrets}"
+          VPS_PORT="${VPS_PORT:-22}"
+          if [[ ! "$VPS_PORT" =~ ^[0-9]+$ ]] || (( 10#$VPS_PORT < 1 || 10#$VPS_PORT > 65535 )); then
+            echo "::error::VPS_PORT must be a number between 1 and 65535."
+            exit 1
+          fi
+
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
+          umask 077
 
-          printf '%s\n' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_ed25519
+          printf '%s\n' "$VPS_SSH_KEY" | tr -d '\r' > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
 
-          printf '%s\n' "${{ secrets.VPS_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          printf '%s\n' "$VPS_KNOWN_HOSTS" | tr -d '\r' > ~/.ssh/known_hosts
+          HOST_LOOKUP="$VPS_HOST"
+          if [[ "$VPS_PORT" != 22 ]]; then
+            HOST_LOOKUP="[$VPS_HOST]:$VPS_PORT"
+          fi
+
+          if ! ssh-keygen -F "$HOST_LOOKUP" -f ~/.ssh/known_hosts > /dev/null; then
+            # Reuse only an already pinned key for this same host on a custom port.
+            if [[ "$VPS_PORT" != 22 ]] && MATCHES="$(ssh-keygen -F "$VPS_HOST" -f ~/.ssh/known_hosts)"; then
+              printf '%s\n' "$MATCHES" | awk -v host="$HOST_LOOKUP" '
+                /^#/ { next }
+                NF { if ($1 ~ /^@/) $2 = host; else $1 = host; print }
+              ' >> ~/.ssh/known_hosts
+            else
+              echo "::error::VPS_KNOWN_HOSTS has no entry for VPS_HOST and VPS_PORT. Replace it with verified ssh-keyscan -p PORT HOST output."
+              exit 1
+            fi
+          fi
+          ssh-keygen -l -f ~/.ssh/known_hosts > /dev/null
           chmod 644 ~/.ssh/known_hosts
+
+          cat > ~/.ssh/config <<'SSH_CONFIG'
+          Host *
+            BatchMode yes
+            StrictHostKeyChecking yes
+            IdentitiesOnly yes
+            IdentityFile ~/.ssh/id_ed25519
+            UserKnownHostsFile ~/.ssh/known_hosts
+            ConnectTimeout 15
+          SSH_CONFIG
+
+      - name: Verify SSH connection
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
+        run: ssh -p "${VPS_PORT:-22}" "${VPS_USER}@${VPS_HOST}" true
 
       - name: Deploy application
         env:
@@ -59,6 +112,7 @@ jobs:
           VPS_PORT: ${{ secrets.VPS_PORT }}
           DEPLOY_PATH: /var/www/my-vue-app
         run: |
+          VPS_PORT="${VPS_PORT:-22}"
           RELEASE="${GITHUB_SHA}"
           RELEASE_PATH="${DEPLOY_PATH}/releases/${RELEASE}"
 
@@ -90,6 +144,7 @@ jobs:
           VPS_PORT: ${{ secrets.VPS_PORT }}
           DEPLOY_PATH: /var/www/my-vue-app
         run: |
+          VPS_PORT="${VPS_PORT:-22}"
           ssh \
             -p "${VPS_PORT}" \
             "${VPS_USER}@${VPS_HOST}" \

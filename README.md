@@ -150,6 +150,19 @@ Then run `npm run dev`. Laravel's `SANCTUM_STATEFUL_DOMAINS` must include the de
 - **Security headers:** a CSP allowing `self`, `res.cloudinary.com` and the API origin for `connect-src`, and the gateway hosts for `form-action`/`frame-src` if a popup SDK is used. Also `Strict-Transport-Security`, `X-Content-Type-Options: nosniff` and `Referrer-Policy: strict-origin-when-cross-origin`.
 - **Link previews:** the app is client-rendered. Share previews need server-side OG tags; see handoff §11.
 
+### Production SSH setup
+
+The deployment workflow reads `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`, and `VPS_KNOWN_HOSTS` from GitHub secrets available to the `production` environment. `VPS_PORT` defaults to `22`. Set `VPS_HOST` to the hostname or IP only, without `https://`, a username, or a port.
+
+To prepare `VPS_KNOWN_HOSTS`, run the following locally with the actual SSH port and host:
+
+```sh
+ssh-keyscan -p PORT HOST > vps-known-hosts
+ssh-keygen -lf vps-known-hosts
+```
+
+Compare the fingerprint with the host key fingerprint shown through the VPS provider's trusted console (`ssh-keygen -lf /etc/ssh/ssh_host_ed25519_key.pub` for the server's Ed25519 key). Save only verified key lines from `vps-known-hosts` as the `VPS_KNOWN_HOSTS` secret, then rerun the workflow. This secret contains full known-hosts entries, not just a `SHA256:` fingerprint or the deploy user's public key. Custom ports use `[HOST]:PORT` entries; the workflow also accepts existing hostname entries for the same trusted host. If a stored key is stale, verify the replacement through the VPS console before updating the secret.
+
 ## Testing
 
 - **Unit, component and contract tests:** `npm test` (Vitest + jsdom). This covers utils (money, dates, validators, safe redirects), the route access resolver for every role, store and auth flows, key components, and the API contract samples.
