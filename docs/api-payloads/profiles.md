@@ -380,8 +380,8 @@ Response `200`:
       "favorites_count": 38,
       "offers_count": 0,
       "is_favorited": false,
-      "created_at": "2026-10-20T07:08:31.261Z",
-      "updated_at": "2026-10-20T07:08:31.261Z"
+      "created_at": "2026-10-23T08:55:41.503Z",
+      "updated_at": "2026-10-23T08:55:41.503Z"
     },
     {
       "id": "lst_009",
@@ -568,8 +568,8 @@ Response `200`:
       "favorites_count": 38,
       "offers_count": 0,
       "is_favorited": false,
-      "created_at": "2026-10-15T17:08:31.261Z",
-      "updated_at": "2026-10-15T17:08:31.261Z"
+      "created_at": "2026-10-18T18:55:41.503Z",
+      "updated_at": "2026-10-18T18:55:41.503Z"
     }
   ],
   "meta": {

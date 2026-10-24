@@ -388,14 +388,14 @@ Response `200`:
         "author": "Amaka N.",
         "initials": "AN",
         "body": "Seller offered return on DS-2041 promptly. Good faith.",
-        "created_at": "2026-10-20T13:08:31.567Z"
+        "created_at": "2026-10-23T14:55:41.827Z"
       },
       {
         "id": "n2",
         "author": "Tolu A.",
         "initials": "TA",
         "body": "Raised listing cap after KYC.",
-        "created_at": "2026-10-11T13:08:31.567Z"
+        "created_at": "2026-10-14T14:55:41.827Z"
       }
     ]
   }
@@ -437,7 +437,7 @@ Response `200`:
     "age_hours": 26,
     "over_sla": true,
     "status": "pending",
-    "submitted_at": "2026-10-20T11:08:31.568Z",
+    "submitted_at": "2026-10-23T12:55:41.828Z",
     "auto_checks_passed": 3,
     "auto_checks_total": 4,
     "document": null,
@@ -558,12 +558,12 @@ Response `200`:
     "freight_label": "—",
     "age_label": "6h",
     "risk": "high",
-    "created_at": "2026-10-21T07:08:31.569Z",
+    "created_at": "2026-10-24T08:55:41.829Z",
     "payment_gateway": "paystack",
     "payment_reference": "PSK_8812_a91f",
     "ledger": [
       {
-        "at": "2026-10-21T07:08:31.569Z",
+        "at": "2026-10-24T08:55:41.829Z",
         "entry": "Card payment captured (Paystack)",
         "amount": {
           "amount": 223500,
@@ -571,7 +571,7 @@ Response `200`:
         }
       },
       {
-        "at": "2026-10-21T07:08:31.569Z",
+        "at": "2026-10-24T08:55:41.829Z",
         "entry": "Escrow hold created",
         "amount": {
           "amount": 223500,
@@ -827,6 +827,7 @@ Response `200`:
     "headline": "Buy, sell or swap premium aviation gear",
     "subtext": "The trusted marketplace for pilots, mechanics and fleet operators. Turn surplus hangar kit and flight gear into the assets you need — funds held in escrow until goods land.",
     "button_label": "Shop verified gear",
+    "thumb_label": "Verified gear",
     "link": "/marketplace",
     "audience": "All users · always",
     "locales": "EN · FR · HA",
@@ -981,8 +982,8 @@ Response `200`:
   "success": true,
   "data": [
     {
-      "id": "au_lj4rr29",
-      "at": "2026-10-21T13:08:31.574Z",
+      "id": "au_4nqjmsx",
+      "at": "2026-10-24T14:55:41.834Z",
       "actor": {
         "name": "Tolu Adeyemi",
         "initials": "TA",
@@ -995,8 +996,8 @@ Response `200`:
       "ip": "102.89.4.12"
     },
     {
-      "id": "au_6ap8opw",
-      "at": "2026-10-21T13:08:31.572Z",
+      "id": "au_xaa6wm4",
+      "at": "2026-10-24T14:55:41.832Z",
       "actor": {
         "name": "Tolu Adeyemi",
         "initials": "TA",
@@ -1236,14 +1237,14 @@ Response `200`:
         "author": "Amaka N.",
         "initials": "AN",
         "body": "Seller offered return on DS-2041 promptly. Good faith.",
-        "created_at": "2026-10-20T13:08:31.577Z"
+        "created_at": "2026-10-23T14:55:41.837Z"
       },
       {
         "id": "n2",
         "author": "Tolu A.",
         "initials": "TA",
         "body": "Raised listing cap after KYC.",
-        "created_at": "2026-10-11T13:08:31.577Z"
+        "created_at": "2026-10-14T14:55:41.837Z"
       }
     ]
   }
@@ -1279,7 +1280,7 @@ Response `200`:
     "age_hours": 26,
     "over_sla": true,
     "status": "done",
-    "submitted_at": "2026-10-20T11:08:31.577Z",
+    "submitted_at": "2026-10-23T12:55:41.837Z",
     "auto_checks_passed": 3,
     "auto_checks_total": 4,
     "document": null,

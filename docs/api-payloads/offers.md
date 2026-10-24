@@ -36,7 +36,7 @@ Response `201`:
   "success": true,
   "message": "Offer sent. The seller has 24h to respond.",
   "data": {
-    "id": "off_inzm0p1",
+    "id": "off_wx5ochf",
     "kind": "offer",
     "direction": "sent",
     "status": "pending",
@@ -98,8 +98,8 @@ Response `201`:
       "trades": 1204,
       "member_since": "2024-01-01T00:00:00Z"
     },
-    "expires_at": "2026-10-22T13:08:31.539Z",
-    "created_at": "2026-10-21T13:08:31.539Z",
+    "expires_at": "2026-10-25T14:55:41.798Z",
+    "created_at": "2026-10-24T14:55:41.798Z",
     "history": [],
     "allowed_actions": [
       "cancel",
@@ -219,21 +219,21 @@ Response `200`:
         "location": "Abuja",
         "member_since": "2024-01-01T00:00:00Z"
       },
-      "expires_at": "2026-10-21T22:08:31.283Z",
-      "created_at": "2026-10-21T13:06:07.283Z",
+      "expires_at": "2026-10-24T23:55:41.531Z",
+      "created_at": "2026-10-24T14:53:17.531Z",
       "history": [
         {
           "id": "h1",
           "label": "Offer received · $712",
           "detail": "Today 09:41 · Kunle T.",
-          "occurred_at": "2026-10-21T13:05:31.283Z",
+          "occurred_at": "2026-10-24T14:52:41.531Z",
           "kind": "offer"
         },
         {
           "id": "h2",
           "label": "Listing viewed 6 times",
           "detail": "Jul 26 – Jul 30",
-          "occurred_at": "2026-10-19T13:08:31.283Z",
+          "occurred_at": "2026-10-22T14:55:41.531Z",
           "kind": "view"
         },
         "… 1 more"
@@ -313,21 +313,21 @@ Response `200`:
         "location": "Abuja",
         "member_since": "2024-01-01T00:00:00Z"
       },
-      "expires_at": "2026-10-22T09:08:31.283Z",
-      "created_at": "2026-10-21T10:08:31.283Z",
+      "expires_at": "2026-10-25T10:55:41.531Z",
+      "created_at": "2026-10-24T11:55:41.531Z",
       "history": [
         {
           "id": "h1",
           "label": "Offer received · $560",
           "detail": "Today 09:41 · Jide O.",
-          "occurred_at": "2026-10-21T13:05:31.283Z",
+          "occurred_at": "2026-10-24T14:52:41.531Z",
           "kind": "offer"
         },
         {
           "id": "h2",
           "label": "Listing viewed 6 times",
           "detail": "Jul 26 – Jul 30",
-          "occurred_at": "2026-10-19T13:08:31.283Z",
+          "occurred_at": "2026-10-22T14:55:41.531Z",
           "kind": "view"
         },
         "… 1 more"
@@ -432,21 +432,21 @@ Response `200`:
       "location": "Abuja",
       "member_since": "2024-01-01T00:00:00Z"
     },
-    "expires_at": "2026-10-21T22:08:31.283Z",
-    "created_at": "2026-10-21T13:06:07.283Z",
+    "expires_at": "2026-10-24T23:55:41.531Z",
+    "created_at": "2026-10-24T14:53:17.531Z",
     "history": [
       {
-        "id": "h_8p4ia22",
+        "id": "h_veq9gd9",
         "label": "Counter sent · $728.50",
         "detail": "Buyer has 24h to respond",
-        "occurred_at": "2026-10-21T13:08:31.544Z",
+        "occurred_at": "2026-10-24T14:55:41.800Z",
         "kind": "counter"
       },
       {
         "id": "h1",
         "label": "Offer received · $712",
         "detail": "Today 09:41 · Kunle T.",
-        "occurred_at": "2026-10-21T13:05:31.283Z",
+        "occurred_at": "2026-10-24T14:52:41.531Z",
         "kind": "offer"
       },
       "… 2 more"

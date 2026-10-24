@@ -78,7 +78,18 @@ export interface SocialCallbackResult {
   profile?: { firstName: string; lastName: string; email: string; avatarUrl?: string | null }
   existingAccount?: { displayName: string; memberSince: string; verified: boolean }
   user?: AuthUser
+  /** Token mode only: origins outside SANCTUM_STATEFUL_DOMAINS (e.g. the mobile app) get a bearer token. */
+  accessToken?: string
   challengeId?: string
+}
+
+/**
+ * A started session. Cookie-mode responses may be a bare user; token-mode
+ * responses are `{ user, access_token }`. `toSession()` accepts both.
+ */
+export interface AuthSession {
+  user: AuthUser
+  accessToken?: string
 }
 
 export interface FinishSocialSetupPayload {

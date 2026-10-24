@@ -5,6 +5,7 @@ import { required } from '@/utils/validators'
 import { CONSENT_VERSION, hasConsent, hasDecided, readConsent, saveConsent } from '@/utils/cookieConsent'
 import { registerAnalyticsSink, track } from '@/utils/analytics'
 import { ApiError } from '@/api/errors'
+import { toSession } from '@/api/auth.api'
 
 describe('useForm', () => {
   it('clears a shown error as soon as the field is fixed, without waiting for blur', async () => {
@@ -70,5 +71,17 @@ describe('cookie consent', () => {
   it('ignores corrupted storage', () => {
     localStorage.setItem('pw.cookie-consent', '{nope')
     expect(readConsent().analytics).toBe(false)
+  })
+})
+
+describe('toSession (social / staff sign-in responses)', () => {
+  const user = { id: 'usr_1', email: 'a@b.co' } as unknown as import('@/types').AuthUser
+
+  it('accepts a bare user (cookie mode)', () => {
+    expect(toSession(user)).toEqual({ user })
+  })
+
+  it('keeps the bearer token from { user, access_token } (token mode, e.g. the mobile app)', () => {
+    expect(toSession({ user, accessToken: 'tok_123' })).toEqual({ user, accessToken: 'tok_123' })
   })
 })

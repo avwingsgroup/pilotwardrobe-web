@@ -208,8 +208,8 @@ Response `200`:
       "favorites_count": 38,
       "offers_count": 5,
       "is_favorited": false,
-      "created_at": "2026-10-21T07:08:31.261Z",
-      "updated_at": "2026-10-21T07:08:31.261Z"
+      "created_at": "2026-10-24T08:55:41.503Z",
+      "updated_at": "2026-10-24T08:55:41.503Z"
     },
     {
       "id": "lst_007",
@@ -386,8 +386,8 @@ Response `200`:
       "favorites_count": 38,
       "offers_count": 0,
       "is_favorited": false,
-      "created_at": "2026-10-17T09:08:31.261Z",
-      "updated_at": "2026-10-17T09:08:31.261Z"
+      "created_at": "2026-10-20T10:55:41.503Z",
+      "updated_at": "2026-10-20T10:55:41.503Z"
     }
   ],
   "meta": {
@@ -661,8 +661,8 @@ Response `200`:
       "favorites_count": 38,
       "offers_count": 5,
       "is_favorited": false,
-      "created_at": "2026-10-21T07:08:31.261Z",
-      "updated_at": "2026-10-21T07:08:31.261Z",
+      "created_at": "2026-10-24T08:55:41.503Z",
+      "updated_at": "2026-10-24T08:55:41.503Z",
       "allowed_actions": [
         "edit",
         "preview",
@@ -811,8 +811,8 @@ Response `200`:
       "favorites_count": 38,
       "offers_count": 0,
       "is_favorited": false,
-      "created_at": "2026-10-20T17:08:31.261Z",
-      "updated_at": "2026-10-20T17:08:31.261Z",
+      "created_at": "2026-10-23T18:55:41.503Z",
+      "updated_at": "2026-10-23T18:55:41.503Z",
       "allowed_actions": [
         "edit",
         "preview",
@@ -888,8 +888,8 @@ Response `201`:
   "success": true,
   "message": "Draft saved.",
   "data": {
-    "id": "lst_p12jfpt",
-    "slug": "david-clark-h10-13-4-headset-3jjm",
+    "id": "lst_8ga7hwn",
+    "slug": "david-clark-h10-13-4-headset-59sk",
     "title": "David Clark H10-13.4 headset",
     "description": "Lightly used, new ear seals, original case and receipt included.",
     "category": {
@@ -1002,8 +1002,8 @@ Response `201`:
     "favorites_count": 0,
     "offers_count": 0,
     "is_favorited": false,
-    "created_at": "2026-10-21T13:08:31.525Z",
-    "updated_at": "2026-10-21T13:08:31.526Z",
+    "created_at": "2026-10-24T14:55:41.783Z",
+    "updated_at": "2026-10-24T14:55:41.784Z",
     "allowed_actions": [
       "finish",
       "preview",
@@ -1015,7 +1015,7 @@ Response `201`:
 
 ### Publish listing — no photos (422)
 
-`POST /listings/lst_p12jfpt/publish` · as `pilot@example.com` (user, KYC approved)
+`POST /listings/lst_8ga7hwn/publish` · as `pilot@example.com` (user, KYC approved)
 
 Response `422`:
 
@@ -1108,7 +1108,7 @@ Response `201`:
   "success": true,
   "message": "Uploaded.",
   "data": {
-    "id": "med_ciy3r1x",
+    "id": "med_3fa8t55",
     "public_id": "pilotwardrobe/listing/photo.jpg",
     "url": "blob:mock",
     "secure_url": "blob:mock",

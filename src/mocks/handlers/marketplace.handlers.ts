@@ -24,7 +24,8 @@ on('GET', '/home', () => {
   const live = publicListings().map(withViewer)
   const physical = live.filter((l) => l.format === 'physical')
   return ok({
-    heroSlides: db.admin.heroSlides.filter((s) => s.status === 'live').length ? db.admin.heroSlides : heroSlides,
+    // Only live slides reach the storefront; scheduled/draft ones stay in the CMS (AD15).
+    heroSlides: (db.admin.heroSlides.length ? db.admin.heroSlides : heroSlides).filter((s) => s.status === 'live'),
     categories: categories.filter((c) => ['pilotwardrobe', 'headsets', 'watches', 'flight-bags', 'books-manuals', 'avionics', 'uniforms', 'eyewear'].includes(c.slug)),
     sections: [
       { key: 'fresh', title: 'Fresh on the flightline', subtitle: 'Recently listed by verified sellers', viewAllTo: '/marketplace?sort=newest', listings: [live[0], live[1], live[2], live[3]].filter(Boolean) },

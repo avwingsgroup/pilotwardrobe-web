@@ -1,4 +1,5 @@
 import type {
+  AuthSession,
   AuthUser,
   EmailLookupResult,
   FinishSocialSetupPayload,
@@ -19,6 +20,11 @@ import type {
 import { api, ensureCsrfCookie } from './client'
 
 const quiet = { skipAuthRedirect: true }
+
+/** Accepts a bare user (cookie mode) or `{ user, access_token }` (token mode). */
+export function toSession(raw: AuthUser | AuthSession): AuthSession {
+  return 'user' in raw && raw.user ? { user: raw.user, accessToken: raw.accessToken } : { user: raw as AuthUser }
+}
 
 /**
  * `status` is an additive field: a backend that returns only `{ user, access_token }`
@@ -86,18 +92,18 @@ export const authService = {
   socialCallback(provider: SocialProvider, params: { code: string; state: string }) {
     return api.post<SocialCallbackResult>(`/auth/social/${provider}/callback`, params, quiet)
   },
-  finishSocialSetup(payload: FinishSocialSetupPayload) {
-    return api.post<AuthUser>('/auth/social/complete', payload, quiet)
+  async finishSocialSetup(payload: FinishSocialSetupPayload) {
+    return toSession(await api.post<AuthUser | AuthSession>('/auth/social/complete', payload, quiet))
   },
-  linkSocial(payload: LinkSocialPayload) {
-    return api.post<AuthUser>('/auth/social/link', payload, quiet)
+  async linkSocial(payload: LinkSocialPayload) {
+    return toSession(await api.post<AuthUser | AuthSession>('/auth/social/link', payload, quiet))
   },
 
   /* Staff (Control Tower) — Google Workspace SSO then WebAuthn security key. */
   staffGoogle() {
     return api.post<StaffSignInStart>('/admin/auth/google', undefined, quiet)
   },
-  staffWebAuthn(challengeId: string, credential: Record<string, unknown>) {
-    return api.post<AuthUser>('/admin/auth/webauthn', { challengeId, credential }, quiet)
+  async staffWebAuthn(challengeId: string, credential: Record<string, unknown>) {
+    return toSession(await api.post<AuthUser | AuthSession>('/admin/auth/webauthn', { challengeId, credential }, quiet))
   },
 }

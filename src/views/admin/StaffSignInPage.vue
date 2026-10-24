@@ -54,8 +54,8 @@ async function securityKey() {
       if (!assertion) throw new Error('Security key not confirmed')
       credential = { id: assertion.id, type: assertion.type }
     }
-    const user = await authService.staffWebAuthn(challenge.value.id, credential)
-    auth.setSession(user)
+    const session = await authService.staffWebAuthn(challenge.value.id, credential)
+    auth.setSession(session.user, session.accessToken)
     await router.replace(safeRedirect(route.query.next, '/admin/overview'))
   } catch (e) {
     error.value = e instanceof Error && !('status' in e) ? e.message : toApiError(e).message

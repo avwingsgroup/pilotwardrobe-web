@@ -302,6 +302,8 @@ export interface HeroSlide {
   headline: string
   subtext: string
   buttonLabel: string
+  /** Short caption under the slide's thumbnail (falls back to `buttonLabel`). */
+  thumbLabel?: string | null
   link: string
   audience: string
   locales: string

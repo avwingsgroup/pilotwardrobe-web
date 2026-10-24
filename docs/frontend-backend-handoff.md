@@ -52,6 +52,34 @@ CORS_ALLOWED_ORIGINS=https://pilotwardrobe.com,http://localhost:5173   # support
 
 This mode is for split domains where cookies cannot work. Login returns `access_token`, `token_type: "Bearer"` and `expires_in`. The SPA keeps the token in memory, mirrors it to `sessionStorage` (or `localStorage` when "Keep me signed in" is ticked) and sends `Authorization: Bearer …`. Tokens should be short-lived. Cookie mode is preferred because a token stored in JavaScript is exposed to any XSS.
 
+### 2.2.1 Which build uses which mode
+
+| Build | Origin | `VITE_AUTH_MODE` |
+|---|---|---|
+| Website | `https://pilotwardrobe.com` (and other `*.pilotwardrobe.com` sites) | `cookie` |
+| Mobile app | the app's local WebView origin (`.local`) | **`token`** |
+
+**The mobile app must be built with `VITE_AUTH_MODE=token`.** Sanctum cookie sessions only work for sites under `pilotwardrobe.com`, and the app's `.local` origin isn't one of them. The backend already handles this: any origin outside `SANCTUM_STATEFUL_DOMAINS` receives an `access_token` when it signs in. **Do not add the app's origins to `SANCTUM_STATEFUL_DOMAINS`.** That would switch them back to cookie sessions, which can't work there.
+
+The token arrives from every sign-in path, and the SPA stores it from each one:
+
+- password login: `POST /auth/login`, and `POST /auth/two-factor` when 2FA is on
+- registration: `POST /auth/register`
+- social sign-in: `POST /auth/social/{provider}/callback`, `/auth/social/complete`, `/auth/social/link`
+- staff sign-in: `POST /admin/auth/webauthn`
+
+Social and staff endpoints may return a bare user (cookie mode) or `{ user, access_token }` (token mode); `toSession()` in `src/api/auth.api.ts` accepts both.
+
+Mobile build settings (no CSRF URL is needed in token mode, because nothing requests `/sanctum/csrf-cookie`):
+
+```env
+VITE_API_MODE=live
+VITE_AUTH_MODE=token
+VITE_API_BASE_URL=https://api.pilotwardrobe.com/api/v1
+```
+
+One product decision to make for mobile: tokens go to `sessionStorage` unless "Keep me signed in" is ticked. Many app WebViews clear `sessionStorage` when the app is closed, so without that box users would sign in again on every launch. Either default the box to ticked in the app build, or keep the token in secure native storage.
+
 ### 2.3 The session principal
 
 `GET /auth/me` is the **only** source of truth for who the user is. The SPA calls it on boot, after login, 2FA, registration and social completion, and after role or permission changes. It must return:

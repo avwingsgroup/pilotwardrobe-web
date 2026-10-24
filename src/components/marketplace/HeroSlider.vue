@@ -14,7 +14,6 @@ const props = defineProps<{ slides: HeroSlide[] }>()
 const index = ref(0)
 const playing = ref(true)
 const current = computed(() => props.slides[index.value])
-const thumbLabels = ['Verified gear', 'Headset deals', 'Uniform drop']
 let timer: ReturnType<typeof setInterval> | null = null
 
 function go(i: number) {
@@ -23,7 +22,7 @@ function go(i: number) {
 
 function start() {
   stop()
-  if (!playing.value || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  if (!playing.value || props.slides.length < 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
   timer = setInterval(() => go(index.value + 1), 7000)
 }
 
@@ -53,7 +52,7 @@ onBeforeUnmount(stop)
         <AppButton :to="current.link" size="lg">{{ current.buttonLabel }}</AppButton>
         <RouterLink to="/how-to-swap" class="pw-hero__link">How swapping works <ArrowRight :size="16" aria-hidden="true" /></RouterLink>
       </div>
-      <div class="pw-hero__progress">
+      <div v-if="slides.length > 1" class="pw-hero__progress">
         <span class="pw-hero__dots" aria-hidden="true">
           <span v-for="(s, i) in slides" :key="s.id" :class="{ 'is-active': i === index }" />
         </span>
@@ -69,11 +68,11 @@ onBeforeUnmount(stop)
         <AppImage :key="current.id" :media="current.image" ratio="16 / 10" fit="cover" :priority="index === 0" sizes="(min-width: 1024px) 60vw, 100vw" class="pw-hero__img" />
       </Transition>
       <div class="pw-hero__fade" aria-hidden="true" />
-      <div class="pw-hero__arrows">
+      <div v-if="slides.length > 1" class="pw-hero__arrows">
         <button type="button" aria-label="Previous slide" @click="go(index - 1)"><ChevronLeft :size="20" /></button>
         <button type="button" aria-label="Next slide" @click="go(index + 1)"><ChevronRight :size="20" /></button>
       </div>
-      <div class="pw-hero__thumbs" role="tablist" aria-label="Choose slide">
+      <div v-if="slides.length > 1" class="pw-hero__thumbs" role="tablist" aria-label="Choose slide">
         <button
           v-for="(s, i) in slides"
           :key="s.id"
@@ -86,7 +85,7 @@ onBeforeUnmount(stop)
           @click="go(i)"
         >
           <AppImage :media="s.image" ratio="16 / 9" sizes="110px" />
-          <span>{{ thumbLabels[i] ?? s.buttonLabel }}</span>
+          <span>{{ s.thumbLabel || s.buttonLabel }}</span>
         </button>
       </div>
     </div>

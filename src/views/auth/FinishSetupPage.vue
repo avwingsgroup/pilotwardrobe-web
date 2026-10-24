@@ -72,10 +72,10 @@ watch(
 
 async function submit() {
   if (availability.value === 'taken') return
-  const user = await form.submit((v) => authService.finishSocialSetup({ ...v, pendingToken: pending!.pendingToken! }))
-  if (user) {
+  const session = await form.submit((v) => authService.finishSocialSetup({ ...v, pendingToken: pending!.pendingToken! }))
+  if (session) {
     sessionStorage.removeItem('pw.social')
-    auth.setSession(user)
+    auth.setSession(session.user, session.accessToken)
     await router.replace({ name: 'account-ready', query: { next: safeRedirect(route.query.next, '') || undefined } })
   }
 }

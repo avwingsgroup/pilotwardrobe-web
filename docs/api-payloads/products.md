@@ -249,8 +249,8 @@ Response `200`:
     "favorites_count": 38,
     "offers_count": 0,
     "is_favorited": false,
-    "created_at": "2026-10-20T07:08:31.261Z",
-    "updated_at": "2026-10-20T07:08:31.261Z"
+    "created_at": "2026-10-23T08:55:41.503Z",
+    "updated_at": "2026-10-23T08:55:41.503Z"
   }
 }
 ```
@@ -407,8 +407,8 @@ Response `200`:
       "favorites_count": 38,
       "offers_count": 0,
       "is_favorited": false,
-      "created_at": "2026-10-20T17:08:31.261Z",
-      "updated_at": "2026-10-20T17:08:31.261Z"
+      "created_at": "2026-10-23T18:55:41.503Z",
+      "updated_at": "2026-10-23T18:55:41.503Z"
     },
     {
       "id": "lst_004",
@@ -589,8 +589,8 @@ Response `200`:
       "favorites_count": 38,
       "offers_count": 3,
       "is_favorited": true,
-      "created_at": "2026-10-19T09:08:31.261Z",
-      "updated_at": "2026-10-19T09:08:31.261Z"
+      "created_at": "2026-10-22T10:55:41.503Z",
+      "updated_at": "2026-10-22T10:55:41.503Z"
     },
     "… 2 more"
   ]
@@ -790,6 +790,7 @@ Response `200`:
         "headline": "Buy, sell or swap premium aviation gear",
         "subtext": "The trusted marketplace for pilots, mechanics and fleet operators. Turn surplus hangar kit and flight gear into the assets you need — funds held in escrow until goods land.",
         "button_label": "Shop verified gear",
+        "thumb_label": "Verified gear",
         "link": "/marketplace",
         "audience": "All users · always",
         "locales": "EN · FR · HA",
@@ -829,50 +830,50 @@ Response `200`:
         }
       },
       {
-        "id": "hs_2",
-        "position": 2,
-        "headline": "Headset Week · free buyer protection",
-        "subtext": "ANR headsets from verified crews, with buyer protection on us until Sunday.",
-        "button_label": "Shop headsets",
-        "link": "/category/headsets",
-        "audience": "NG, GH · Aug 4–10",
+        "id": "hs_3",
+        "position": 3,
+        "headline": "Prints from aviation photographers",
+        "subtext": "Raw, unfiltered aviation photography captured by pilots — prints and licences available.",
+        "button_label": "Browse photographers",
+        "thumb_label": "Aviation prints",
+        "link": "/photographers",
+        "audience": "All users · always",
         "locales": "EN",
-        "status": "scheduled",
-        "schedule": "Aug 4–10",
+        "status": "live",
+        "schedule": "always",
         "image": {
-          "id": "med_bose-a20",
-          "public_id": "pilotwardrobe/listings/bose-a20",
-          "url": "/media/mock/bose-a20-1408.jpg",
-          "secure_url": "/media/mock/bose-a20-1408.jpg",
-          "width": 1408,
-          "height": 768,
+          "id": "med_photo-warbird-formation",
+          "public_id": "pilotwardrobe/photography/photo-warbird-formation",
+          "url": "/media/mock/photo-warbird-formation-598.jpg",
+          "secure_url": "/media/mock/photo-warbird-formation-598.jpg",
+          "width": 598,
+          "height": 392,
           "format": "jpg",
-          "bytes": 194642,
-          "alt": "Bose A20 aviation headset with dual GA plugs on a light surface",
+          "bytes": 42195,
+          "alt": "Black-and-white warbird formation trailing smoke",
           "variants": {
-            "thumbnail": "/media/mock/bose-a20-320.webp",
-            "small": "/media/mock/bose-a20-320.webp",
-            "medium": "/media/mock/bose-a20-640.webp",
-            "large": "/media/mock/bose-a20-1408.webp",
-            "original": "/media/mock/bose-a20-1408.jpg"
+            "thumbnail": "/media/mock/photo-warbird-formation-320.webp",
+            "small": "/media/mock/photo-warbird-formation-320.webp",
+            "medium": "/media/mock/photo-warbird-formation-598.webp",
+            "large": "/media/mock/photo-warbird-formation-598.webp",
+            "original": "/media/mock/photo-warbird-formation-598.jpg"
           },
           "sources": [
             {
-              "url": "/media/mock/bose-a20-320.avif",
+              "url": "/media/mock/photo-warbird-formation-320.avif",
               "width": 320,
               "format": "avif"
             },
             {
-              "url": "/media/mock/bose-a20-640.avif",
-              "width": 640,
+              "url": "/media/mock/photo-warbird-formation-598.avif",
+              "width": 598,
               "format": "avif"
             },
-            "… 10 more"
+            "… 4 more"
           ],
-          "placeholder": "#dddddd"
+          "placeholder": "#7d8796"
         }
-      },
-      "… 1 more"
+      }
     ],
     "categories": [
       {
@@ -1120,8 +1121,8 @@ Response `200`:
             "favorites_count": 38,
             "offers_count": 0,
             "is_favorited": false,
-            "created_at": "2026-10-20T17:08:31.261Z",
-            "updated_at": "2026-10-20T17:08:31.261Z"
+            "created_at": "2026-10-23T18:55:41.503Z",
+            "updated_at": "2026-10-23T18:55:41.503Z"
           },
           {
             "id": "lst_003",
@@ -1350,8 +1351,8 @@ Response `200`:
             "favorites_count": 38,
             "offers_count": 0,
             "is_favorited": false,
-            "created_at": "2026-10-20T07:08:31.261Z",
-            "updated_at": "2026-10-20T07:08:31.261Z"
+            "created_at": "2026-10-23T08:55:41.503Z",
+            "updated_at": "2026-10-23T08:55:41.503Z"
           },
           "… 2 more"
         ]
@@ -1540,8 +1541,8 @@ Response `200`:
             "favorites_count": 38,
             "offers_count": 0,
             "is_favorited": false,
-            "created_at": "2026-10-18T15:08:31.261Z",
-            "updated_at": "2026-10-18T15:08:31.261Z"
+            "created_at": "2026-10-21T16:55:41.503Z",
+            "updated_at": "2026-10-21T16:55:41.503Z"
           },
           {
             "id": "lst_006",
@@ -1684,8 +1685,8 @@ Response `200`:
             "favorites_count": 38,
             "offers_count": 0,
             "is_favorited": false,
-            "created_at": "2026-10-17T19:08:31.261Z",
-            "updated_at": "2026-10-17T19:08:31.261Z"
+            "created_at": "2026-10-20T20:55:41.503Z",
+            "updated_at": "2026-10-20T20:55:41.503Z"
           },
           "… 2 more"
         ]

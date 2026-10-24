@@ -39,7 +39,7 @@ onMounted(async () => {
     const result = await authService.socialCallback(provider, { code, state })
     const next = safeRedirect(storedNext(), '/')
     if (result.status === 'authenticated' && result.user) {
-      auth.setSession(result.user)
+      auth.setSession(result.user, result.accessToken)
       track('login_completed', { method: provider })
       await router.replace(next)
     } else if (result.status === 'new_account') {

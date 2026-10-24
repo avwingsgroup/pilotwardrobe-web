@@ -124,7 +124,7 @@ tests/
 
 1. Set `VITE_API_MODE=live` and `VITE_API_BASE_URL=https://api.example.com/api/v1`.
 2. Cookie mode (recommended, same-site deployment): set `VITE_AUTH_MODE=cookie` and `VITE_SANCTUM_CSRF_URL`. On the Laravel side, configure `SANCTUM_STATEFUL_DOMAINS`, `SESSION_DOMAIN`, and CORS with `supports_credentials=true`.
-3. Token mode (cross-site deployment): set `VITE_AUTH_MODE=token`. Login must return `access_token`.
+3. Token mode (cross-site deployment, and **always for the mobile app**): set `VITE_AUTH_MODE=token`. The backend returns `access_token` to any origin outside `SANCTUM_STATEFUL_DOMAINS`; don't add the app's origins there. See handoff §2.2.1.
 4. Implement the endpoints in `docs/backend-api-contract.md`. `docs/frontend-backend-handoff.md` §13 has the go-live checklist.
 
 ### Local Laravel (Laragon, Valet, Herd)

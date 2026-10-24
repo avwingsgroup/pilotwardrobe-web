@@ -33,10 +33,10 @@ if (!pending?.pendingToken) void router.replace({ name: 'auth' })
 const form = useForm({ password: '' }, { password: [required('Enter your Pilotwardrobe password.')] })
 
 async function submit() {
-  const user = await form.submit((v) => authService.linkSocial({ pendingToken: pending!.pendingToken!, password: v.password }))
-  if (user) {
+  const session = await form.submit((v) => authService.linkSocial({ pendingToken: pending!.pendingToken!, password: v.password }))
+  if (session) {
     sessionStorage.removeItem('pw.social')
-    auth.setSession(user)
+    auth.setSession(session.user, session.accessToken)
     await router.replace(safeRedirect(route.query.next, '/'))
   }
 }

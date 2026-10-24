@@ -55,6 +55,13 @@ const PHONES = [
   { label: 'Android', webp: phoneAndroidWebp, png: phoneAndroidPng },
 ]
 
+/** The home rail shows one row (V1); the full list is one click away via "All categories". */
+const HOME_CATEGORY_LIMIT = 8
+const homeCategories = computed(() => (data.value?.categories ?? []).slice(0, HOME_CATEGORY_LIMIT))
+
+/** Rails and the gallery only render when they have content; an empty rail is just a heading over a hole. */
+const visibleSections = computed(() => (data.value?.sections ?? []).filter((s) => s.listings.length > 0))
+
 const features = [
   { icon: Send, title: 'Aviation-only platform', body: 'Curated specifically for pilots, crew and engineers.' },
   { icon: CircleCheck, title: 'Verified sellers', body: 'Every seller clears KYC before the first listing goes live.' },
@@ -91,12 +98,12 @@ const features = [
         <div class="pw-container">
           <SectionHeader id="h-cats" title="Gear by category" link-label="All categories" :to="{ name: 'categories' }" />
           <ul class="pw-home__cats" role="list">
-            <li v-for="c in data.categories" :key="c.id"><CategoryTile :category="c" /></li>
+            <li v-for="c in homeCategories" :key="c.id"><CategoryTile :category="c" /></li>
           </ul>
         </div>
       </section>
 
-      <template v-for="(section, si) in data.sections" :key="section.key">
+      <template v-for="(section, si) in visibleSections" :key="section.key">
         <section class="pw-home__section" :aria-labelledby="`h-${section.key}`">
           <div class="pw-container">
             <SectionHeader :id="`h-${section.key}`" :title="section.title" :subtitle="section.subtitle" :to="section.viewAllTo" />
@@ -124,7 +131,7 @@ const features = [
         </div>
       </section>
 
-      <section class="pw-home__section pw-home__section--white" aria-labelledby="h-gallery">
+      <section v-if="galleryColumns.some((col) => col.length)" class="pw-home__section pw-home__section--white" aria-labelledby="h-gallery">
         <div class="pw-container">
           <SectionHeader id="h-gallery" title="Flight deck gallery" subtitle="Raw, unfiltered aviation photography captured by pilots — prints and licences available." link-label="Browse photographers" :to="{ name: 'photographers' }" />
           <div class="pw-home__gallery">
@@ -412,6 +419,13 @@ const features = [
 }
 
 @media (min-width: 1024px) {
+  /* Desktop: one fixed row that shrinks to fit, so the rail never scrolls. */
+  .pw-home__cats {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    overflow-x: visible;
+    padding-bottom: 0;
+  }
   .pw-home__app-inner {
     grid-template-columns: 1fr 1fr;
   }

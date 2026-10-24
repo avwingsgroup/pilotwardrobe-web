@@ -105,19 +105,19 @@ Response `200`:
         "id": "ses_1",
         "device": "Chrome on macOS",
         "location": "Lagos, NG",
-        "last_active_at": "2026-10-21T13:08:31.245Z",
+        "last_active_at": "2026-10-24T14:55:41.481Z",
         "current": true
       },
       {
         "id": "ses_2",
         "device": "Pilotwardrobe iOS 3.2",
         "location": "iPhone 15 · Lagos, NG",
-        "last_active_at": "2026-10-21T11:08:31.245Z",
+        "last_active_at": "2026-10-24T12:55:41.481Z",
         "current": false
       },
       "… 1 more"
     ],
-    "password_changed_at": "2026-07-21T13:08:31.245Z"
+    "password_changed_at": "2026-07-24T14:55:41.481Z"
   }
 }
 ```
@@ -274,7 +274,7 @@ Response `200`:
       "warn_outside_measurements": true,
       "use_at_checkout": false
     },
-    "updated_at": "2026-10-21T13:08:31.488Z",
+    "updated_at": "2026-10-24T14:55:41.748Z",
     "orders_used_on": 6
   }
 }
@@ -352,7 +352,7 @@ Response `201`:
     "state": "Lagos",
     "country_code": "NG",
     "is_default": false,
-    "id": "adr_gspoo9d"
+    "id": "adr_8xbv0yc"
   }
 }
 ```
@@ -472,7 +472,7 @@ Response `200`:
         "id": "f-lst_001",
         "kind": "listing",
         "title": "Bose A20 Aviation Headset — dual GA plugs",
-        "subtitle": "Listed Oct 21 · 412 views · 5 offers",
+        "subtitle": "Listed Oct 24 · 412 views · 5 offers",
         "image": {
           "id": "med_bose-a20",
           "public_id": "pilotwardrobe/listings/bose-a20",
