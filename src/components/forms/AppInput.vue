@@ -91,7 +91,7 @@ const describedBy = computed(() => (props.error ? `${inputId.value}-error` : pro
   min-height: var(--pw-touch);
   padding: 0 var(--pw-space-3);
   background: var(--pw-surface);
-  border: 1px solid var(--pw-border-strong);
+  border: 1px solid var(--pw-input-border);
   border-radius: var(--pw-radius-md);
   transition:
     border-color var(--pw-duration) var(--pw-ease),

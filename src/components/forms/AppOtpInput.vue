@@ -103,7 +103,7 @@ defineExpose({ focus: () => inputs.value[0]?.focus() })
   width: 64px;
   height: 64px;
   padding: 0;
-  border: 1.5px solid var(--pw-border-strong);
+  border: 1.5px solid var(--pw-input-border);
   border-radius: var(--pw-radius-lg);
   background: var(--pw-surface);
   font-family: var(--pw-font-display);

@@ -51,7 +51,7 @@ const counter = computed(() => (props.showCount && props.maxlength ? `${model.va
   width: 100%;
   min-height: 88px;
   padding: var(--pw-space-3);
-  border: 1px solid var(--pw-border-strong);
+  border: 1px solid var(--pw-input-border);
   border-radius: var(--pw-radius-md);
   background: var(--pw-surface);
   font-size: var(--pw-text-md);

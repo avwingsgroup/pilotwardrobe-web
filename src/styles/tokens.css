@@ -29,6 +29,7 @@
   --pw-disabled: #c6cdd9;
   --pw-border: #e3e7ee;
   --pw-border-strong: #cfd5df;
+  --pw-input-border: #97adcf; /* light dark-blue: text fields, selects, checkboxes */
   --pw-surface: #ffffff;
   --pw-surface-sunken: #f5f6f9; /* page background */
   --pw-surface-raised: #ffffff;

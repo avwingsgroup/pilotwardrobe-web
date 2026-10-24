@@ -54,7 +54,7 @@ const selectId = computed(() => props.id ?? autoId)
   width: 100%;
   min-height: var(--pw-touch);
   padding: 0 40px 0 var(--pw-space-3);
-  border: 1px solid var(--pw-border-strong);
+  border: 1px solid var(--pw-input-border);
   border-radius: var(--pw-radius-md);
   background: var(--pw-surface);
   font-size: var(--pw-text-md);

@@ -42,7 +42,7 @@ function step(delta: number) {
   align-items: center;
   justify-content: space-between;
   min-height: var(--pw-touch);
-  border: 1px solid var(--pw-border-strong);
+  border: 1px solid var(--pw-input-border);
   border-radius: var(--pw-radius-md);
   background: var(--pw-surface);
 }

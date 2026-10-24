@@ -15,7 +15,7 @@ const id = useId()
         <span class="pw-check__box" aria-hidden="true"><Check :size="13" :stroke-width="3" /></span>
       </span>
       <span class="pw-check__text">
-        <slot>{{ label }}</slot>
+        <span class="pw-check__label"><slot>{{ label }}</slot></span>
         <span v-if="hint" class="pw-check__hint">{{ hint }}</span>
       </span>
       <span v-if="count !== undefined" class="pw-check__count">{{ count }}</span>
@@ -63,7 +63,7 @@ const id = useId()
   place-items: center;
   width: 20px;
   height: 20px;
-  border: 1.5px solid var(--pw-border-strong);
+  border: 1.5px solid var(--pw-input-border);
   border-radius: var(--pw-radius-xs);
   background: var(--pw-surface);
   color: transparent;
@@ -91,6 +91,11 @@ const id = useId()
   flex-direction: column;
   gap: 2px;
   line-height: 1.4;
+}
+
+/* One inline run, so text and links in the label wrap together. */
+.pw-check__label {
+  display: block;
 }
 
 .pw-check__hint {
